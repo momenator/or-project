@@ -1,70 +1,81 @@
-/* 
-	This is the first attempt to model the given VRP problem.
-	For now, model it as a TSP problem first, make sure it works and then modify it a little bit more to make it model a more realistic VRP model.
+/* TSP, Traveling Salesman Problem */
 
-	TSP problem
-	Muhammad Rafdi
-	25/01/2016
-*/
+/* Written in GNU MathProg by Andrew Makhorin <mao@gnu.org> */
 
-/* Define the number of nodes, why should it be more than 3? */
+/* The Traveling Salesman Problem (TSP) is stated as follows.
+   Let a directed graph G = (V, E) be given, where V = {1, ..., n} is
+   a set of nodes, E <= V x V is a set of arcs. Let also each arc
+   e = (i,j) be assigned a number c[i,j], which is the length of the
+   arc e. The problem is to find a closed path of minimal length going
+   through each node of G exactly once. */
+
 param n, integer, >= 3;
+/* number of nodes */
 
-/* set of vertices */
 set V := 1..n;
+/* set of nodes */
 
-/* set of edges */
-set E, within V cross V; #this means that E is the cross product of V and V
+set E, within V cross V;
+/* set of arcs */
 
-/* set of costs on the edges */ 
-param cost{(i,j) in E};
+param c{(i,j) in E};
+/* distance from node i to node j */
 
-/* variable x[i,j] = 1 if there path i to j is in the optimal one, 0 otherwise */
-var x{(i, j) in E}, binary;
+var x{(i,j) in E}, binary;
+/* x[i,j] = 1 means that the salesman goes from node i to node j */
 
-/* Objective function */
-minimize optimal_distance: sum{(i,j) in E} cost[i,j] * x[i,j];
+minimize total: sum{(i,j) in E} c[i,j] * x[i,j];
+/* the objective is to make the path length as small as possible */
 
-/* Some constraints */
+s.t. leave{i in V}: sum{(i,j) in E} x[i,j] = 1;
+/* the salesman leaves each node i exactly once */
 
-/* Salesman leaves and enters a node exactly once */
-s.t. leave{i in V}: sum{(i, j) in E} x[i,j] = 1;
-s.t. enter{j in V}: sum{(i, j) in E} x[i,j] = 1;
+s.t. enter{j in V}: sum{(i,j) in E} x[i,j] = 1;
+/* the salesman enters each node j exactly once */
 
-/* Subtour elimination, there are a few ways to do this */
+/* Constraints above are not sufficient to describe valid tours, so we
+   need to add constraints to eliminate subtours, i.e. tours which have
+   disconnected components. Although there are many known ways to do
+   that, I invented yet another way. The general idea is the following.
+   Let the salesman sells, say, cars, starting the travel from node 1,
+   where he has n cars. If we require the salesman to sell exactly one
+   car in each node, he will need to go through all nodes to satisfy
+   this requirement, thus, all subtours will be eliminated. */
 
-/* Method 1 */
-/* 
-	To prevent the salesman from travelling to the same city
-	x[i,j] = infinity
-	To prevent a subtour of length 2
-	x[i,j] + x[j,i] <= 1
-	to prevent a subtour of length 3
-	x[i,j] + x[j,k] + x[k,i] <= 2
-	and so on, repeat until subtour elimination of n/2 is achieved
- */
+var y{(i,j) in E}, >= 0;
+/* y[i,j] is the number of cars, which the salesman has after leaving
+   node i and before entering node j; in terms of the network analysis,
+   y[i,j] is a flow through arc (i,j) */
 
-/* Method 2 - http://www.math.uwaterloo.ca/tsp/methods/opt/subtour.htm */
-/*
-	set S, within V, 2 < card(S) < n - 1
-	sum{(i,j) in S} x[i,j] >= 2
-*/
+s.t. cap{(i,j) in E}: y[i,j] <= (n-1) * x[i,j];
+/* if arc (i,j) does not belong to the salesman's tour, its capacity
+   must be zero; it is obvious that on leaving a node, it is sufficient
+   to have not more than n-1 cars */
 
-/* Method 3 - By Andrew Makhorin */
+s.t. node{i in V}:
+/* node[i] is a conservation constraint for node i */
 
-/* Network flow analysis, y[i,j] means a flow through edge i to j */
-var flow{(i,j) in E}, >= 0;
+      sum{(j,i) in E} y[j,i]
+      /* summary flow into node i through all ingoing arcs */
 
-/* flow from i to j should be <= n-1 */
-s.t. capacity{(i,j) in E}: flow[i,j] <= (n-1) * x[i,j];
+      + (if i = 1 then n)
+      /* plus n cars which the salesman has at starting node */
 
-/* network flow constraint to eliminate subtours */
-s.t. node{i in V}: sum{(j,i) in E} flow[j,i] + (if i = 1 then n) = sum{(i,j) in E} flow[i,j] + 1;
+      = /* must be equal to */
+
+      sum{(i,j) in E} y[i,j]
+      /* summary flow from node i through all outgoing arcs */
+
+      + 1;
+      /* plus one car which the salesman sells at node i */
 
 solve;
 
 printf "Optimal tour has length %d\n",
-   sum{(i,j) in E} cost[i,j] * x[i,j];
+   sum{(i,j) in E} c[i,j] * x[i,j];
+printf("From node   To node   Distance\n");
+printf{(i,j) in E: x[i,j]} "      %3d       %3d   %8g\n",
+   i, j, c[i,j];
 
 data;
 
@@ -78,7 +89,7 @@ data;
 
 param n := 16;
 
-param : E : cost :=
+param : E : c :=
     1  2   509
     1  3   501
     1  4   312
@@ -322,6 +333,4 @@ param : E : cost :=
 ;
 
 end;
-
-
 

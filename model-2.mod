@@ -1,70 +1,45 @@
 /* 
-	This is the first attempt to model the given VRP problem.
-	For now, model it as a TSP problem first, make sure it works and then modify it a little bit more to make it model a more realistic VRP model.
-
-	TSP problem
+	TSP problem with MTZ subtour elimination
 	Muhammad Rafdi
-	25/01/2016
+	01/02/2016
 */
 
-/* Define the number of nodes, why should it be more than 3? */
-param n, integer, >= 3;
+/* Number of nodes */
+param n, integer, >=3;
 
-/* set of vertices */
+/* Set of vertices */
 set V := 1..n;
 
-/* set of edges */
-set E, within V cross V; #this means that E is the cross product of V and V
+/* Set of edges */
+set E, within V cross V;
 
-/* set of costs on the edges */ 
+/* Set of costs */
 param cost{(i,j) in E};
 
-/* variable x[i,j] = 1 if there path i to j is in the optimal one, 0 otherwise */
-var x{(i, j) in E}, binary;
+/* Path variable x, x=1 if there is a path from i to j in the optimal tour, 0 otherwise */
+var x{(i,j) in E}, binary;
+
+/* Artificial variable u, for subtour elimination */
+var u {i in V}, >=1;
+
+/* Set of integers from 2 to n for subtour elimination*/
+set I := 2..n; 
 
 /* Objective function */
-minimize optimal_distance: sum{(i,j) in E} cost[i,j] * x[i,j];
-
-/* Some constraints */
+minimize tour_distance: sum{(i,j) in E} cost[i, j] * x[i,j];
 
 /* Salesman leaves and enters a node exactly once */
 s.t. leave{i in V}: sum{(i, j) in E} x[i,j] = 1;
 s.t. enter{j in V}: sum{(i, j) in E} x[i,j] = 1;
 
-/* Subtour elimination, there are a few ways to do this */
-
-/* Method 1 */
-/* 
-	To prevent the salesman from travelling to the same city
-	x[i,j] = infinity
-	To prevent a subtour of length 2
-	x[i,j] + x[j,i] <= 1
-	to prevent a subtour of length 3
-	x[i,j] + x[j,k] + x[k,i] <= 2
-	and so on, repeat until subtour elimination of n/2 is achieved
- */
-
-/* Method 2 - http://www.math.uwaterloo.ca/tsp/methods/opt/subtour.htm */
-/*
-	set S, within V, 2 < card(S) < n - 1
-	sum{(i,j) in S} x[i,j] >= 2
-*/
-
-/* Method 3 - By Andrew Makhorin */
-
-/* Network flow analysis, y[i,j] means a flow through edge i to j */
-var flow{(i,j) in E}, >= 0;
-
-/* flow from i to j should be <= n-1 */
-s.t. capacity{(i,j) in E}: flow[i,j] <= (n-1) * x[i,j];
-
-/* network flow constraint to eliminate subtours */
-s.t. node{i in V}: sum{(j,i) in E} flow[j,i] + (if i = 1 then n) = sum{(i,j) in E} flow[i,j] + 1;
+/* MTZ subtour formulation */
+s.t. subtour_constraint_1: u[1] = 1;
+s.t. subtour_constraint_2{i in I}: 2 <= u[i] <= n;
+s.t. subtour_constraint_3{(i, j) in E, k in I, l in I}: u[k] - u[l] + 1 <= (n - 1) * (1 - x[i,j]);
 
 solve;
 
-printf "Optimal tour has length %d\n",
-   sum{(i,j) in E} cost[i,j] * x[i,j];
+printf "Optimal tour has length %d\n", sum{(i,j) in E} cost[i,j] * x[i,j];
 
 data;
 
@@ -322,6 +297,5 @@ param : E : cost :=
 ;
 
 end;
-
 
 
