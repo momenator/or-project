@@ -22,9 +22,6 @@ var x{(i,j) in E}, binary;
 /* Artificial variable u, for subtour elimination */
 var u {i in V}, >=1;
 
-/* Set of integers from 2 to n for subtour elimination*/
-set I := 2..n; 
-
 /* Objective function */
 minimize tour_distance: sum{(i,j) in E} cost[i, j] * x[i,j];
 
@@ -34,14 +31,36 @@ s.t. enter{j in V}: sum{(i, j) in E} x[i,j] = 1;
 
 /* MTZ subtour formulation */
 s.t. subtour_constraint_1: u[1] = 1;
-s.t. subtour_constraint_2{i in I}: 2 <= u[i] <= n;
-s.t. subtour_constraint_3{(i, j) in E, k in I, l in I}: u[k] - u[l] + 1 <= (n - 1) * (1 - x[i,j]);
+s.t. subtour_constraint_2{(i,j) in E}: 2 <= u[i] <= n;
+s.t. subtour_constraint_3{(i, j) in E}: u[i] - u[j] + 1 <= (n - 1) * (1 - x[i,j]);
 
 solve;
 
 printf "Optimal tour has length %d\n", sum{(i,j) in E} cost[i,j] * x[i,j];
 
 data;
+
+/* Sample data set, optimal solution is 17 */
+
+param n := 4;
+
+param : E : cost :=
+	1  2  4
+	1  3  5
+	1  4  7
+	2  1  4
+	2  3  6
+	2  4  5
+	3  1  5
+	3  2  6
+	3  4  3
+	4  1  7
+	4  2  5
+	4  3  3
+;
+
+end;
+
 
 /* These data correspond to the symmetric instance ulysses16 from:
 
@@ -51,6 +70,7 @@ data;
 
 /* The optimal solution is 6859 */
 
+/*
 param n := 16;
 
 param : E : cost :=
@@ -295,7 +315,7 @@ param : E : cost :=
    16 14   449
    16 15   636
 ;
-
+*/
 end;
 
 
