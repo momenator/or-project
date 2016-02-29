@@ -1,0 +1,89 @@
+Taken from the GMPL manual
+
+GMPL is a free version of AMPL that contains a subset of its features.
+
+1. Symbolic names are named variables inside your model. They are case sensitive and must start with either a letter or an underscore (_).
+
+2. Numeric literals are numbers that can take the form xxEsyy where xx is a number with optional decimal point, s is the sign + or -, yy is a decimal exponent (e.g 123, 12.3, 12E-2, 12e+6).
+
+3. String literals are sequences of characters within closed pair of apostrophes.
+
+4. Keywords are special variables cannot be used as a variable as they serve a specific function in the GMPL. Various examples of keywords include: in, and, by, union, then and not.
+
+5. Delimiters are a single or a sequence of characters. Operators, braces, semicolons etc are part of delimiters.
+
+6. Comments are any text that are placed within '/*' and '*/' symbols (e.g /* comment text here...*/).
+
+7. Expressions are a group of entities (or just an entity) such as variables, literals and keywords that in combination evaluate to a value.
+
+8. Subscripted parameters are like arrays. The notation is: name[i1,i2,...inth]. For example, for a typical matrix, a subscripted parameter would be a[i,j], i denote the row position and j denote the column position. The number of indices in the subscript indicate the dimension.
+
+9. GLPK has very useful built in functions! like log, length etc. Do refer to the docs!
+
+10. GLPK has 4 types of iterated expressions: sum, prod, min and max.
+
+11. Conditional expressions, for example if b > 3 then x else y or if b > 2 then k (no else clause).
+
+12. Order of operations in GLPK is pretty standard. Check the docs!
+
+13. {i in A, (j,k) in B, l in C} is equivalent to:
+	
+	for i in A:
+		for (j,k) in B:
+			for l in C:
+				// do something
+
+	{i in A, (i-1,k) in B, l in C} is equivalent to:
+	
+	for i in A:
+		for (j,k) in B, where j = i - 1:
+			for l in C:
+				// do something
+
+14. How does subscripted set works?? e.g V[1,2]
+
+15. {t in 1..T, (t+1,j) in S: (t,j) in F} is equivalent to:
+	for t in [1..T]:
+		for (k, j) in S, where k = t + 1, and (i, j) in F:
+			// do something!
+
+16. 'diff' is set difference e.g set a := {1,2,3}, b:= {2,3}. a diff b == {'1'}.
+
+17. What is the pseudocode equivalent of this GMPL code:
+	// is step has length of 2 or is each element in step consists of a tuple of length 2?
+	set step{s in 1..maxiter} dimen 2 := if s = 1 then E else
+	   step[s-1] union setof{k in V, (i,k) in step[s-1], (k,j)
+	   in step[s-1]}(i,j);
+
+	// assuming step = { {(1,2),(1,3)}, {(2,4),(4,5),(6,7)} }
+	set step
+	set V
+	E = cross product of V and V
+	for s in 1..maxiter:
+		if s == 1:
+			step[s] = E
+		else:
+			step[s] = step[s-1] union setof{k in V, (i,k) in step[s-1], (k,j)
+	   in step[s-1]}(i,j)
+
+18. Parameters are variables that you assign values to as part of the data section. Whereas variables are typically defined in the model. Param examples:
+
+	1)	param units{raw, prd} >= 0;
+	2)	param profit{prd, 1..T+1};
+	3)	param N := 20, integer, >= 0, <= 100;
+	4)	param comb ’n choose k’ {n in 0..N, k in 0..n} :=
+	   		if k = 0 or k = n then 1 else comb[n-1,k-1] + comb[n-1,k];
+	5)	param p{i in I, j in J}, integer, >= 0, <= i+j,
+	   		in A[i] symdiff B[j], in C[i,j], default 0.5 * (i + j);
+	6)	param month symbolic default ’May’ in {’Mar’, ’Apr’, ’May’};
+
+	explanations
+	1) param : units := 1,2; // the param units consists of two elements, raw and prd and they contain the values 1 and 2 respectively.
+	2) param : profit := 
+	3) single value parameter
+
+
+
+
+
+

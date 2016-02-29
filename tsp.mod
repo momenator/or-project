@@ -78,15 +78,82 @@ printf{(i,j) in E: x[i,j]} "      %3d       %3d   %8g\n",
    i, j, c[i,j];
 
 data;
-
-/* These data correspond to the symmetric instance ulysses16 from:
-
-   Reinelt, G.: TSPLIB - A travelling salesman problem library.
-   ORSA-Journal of the Computing 3 (1991) 376-84;
-   http://elib.zib.de/pub/Packages/mp-testdata/tsp/tsplib */
-
-/* The optimal solution is 6859 */
-
+param n:= 9;
+param : E : c :=
+1 2 2
+1 3 10
+1 4 2
+1 5 3
+1 6 3
+1 7 4
+1 8 10
+1 9 4
+2 1 2
+2 3 2
+2 4 10
+2 5 10
+2 6 10
+2 7 10
+2 8 10
+2 9 10
+3 1 10
+3 2 2
+3 4 2
+3 5 10
+3 6 10
+3 7 10
+3 8 10
+3 9 10
+4 1 2
+4 2 10
+4 3 2
+4 5 10
+4 6 10
+4 7 10
+4 8 10
+4 9 10
+5 1 3
+5 2 10
+5 3 10
+5 4 10
+5 6 3
+5 7 10
+5 8 10
+5 9 10
+6 1 3
+6 2 10
+6 3 10
+6 4 10
+6 5 3
+6 7 10
+6 8 10
+6 9 10
+7 1 4
+7 2 10
+7 3 10
+7 4 10
+7 5 10
+7 6 10
+7 8 4
+7 9 10
+8 1 10
+8 2 10
+8 3 10
+8 4 10
+8 5 10
+8 6 10
+8 7 4
+8 9 4
+9 1 4
+9 2 10
+9 3 10
+9 4 10
+9 5 10
+9 6 10
+9 7 10
+9 8 4
+;
+/*
 param n := 227;
 
 param : E : c :=
@@ -51393,5 +51460,5 @@ param : E : c :=
 134 89 3574
 134 50 3847
 ;
-
+*/
 end;

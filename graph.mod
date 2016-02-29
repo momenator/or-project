@@ -1,57 +1,41 @@
-/* 
-	Capacitated VRP
-	Muhammad Rafdi
-	11/02/2016
-
-  Minimise : sum of all selected paths * its respective costs
-
-  subject to:
-    1) no of vehicles entering one point must be equal to no of vehicles leaving one point
-    2) no of vehicles leaving the depot must be equal to no of vehicles entering the depot
-    3) Capacity constraint
-*/
-
-/* how do you define the variables */
-
-/* Variables */
 param n, integer, >= 3;
 
-set Nodes := 1..n;
+set nodes := 1..n;
 
-set Edges, within Nodes cross Nodes;
+set edges, within nodes cross nodes;
 
-param cost{(i,j) in Edges};
+param cost{(i,j) in edges};
 
-var x{(i,j) in Edges}, binary;
+var x{(i,j) in edges}, binary;
 
-minimize: optimal_distance: sum{(i,j) in E} cost[i,j] * x[i,j];
+s.t. leave{i in nodes}: sum{(i,j) in edges} x[i,j] = 1; 
 
-/* Constraints */
+s.t. enter{j in nodes}: sum{(i,j) in edges} x[i,j] = 1; 
 
-s.t. leave{i in V}: sum{(i,j) in E} x[i,j] = 1;
+/* 3 is K, that means 3 vehicles*/
 
-s.t. enter{j in V}: sum{(i,j) in E} x[i,j] = 1;
+s.t. vehicleEnter{i in nodes}: sum{(i, j) in edges} x[1,i] = 3;
 
-/* vehicle constraints here.. */
-
-s.t. 
+s.t. vehicleLeave{j in nodes}: sum{(i, j) in edges} x[j,1] = 3;
 
 /* Subtour constraints here */
 
-var y{(i,j) in E}, >= 0;
+var y{(i,j) in edges}, >= 0;
 /* y[i,j] is the number of cars, which the salesman has after leaving
    node i and before entering node j; in terms of the network analysis,
    y[i,j] is a flow through arc (i,j) */
 
-s.t. cap{(i,j) in E}: y[i,j] <= (n-1) * x[i,j];
+/* 4 is the capacity of the vehicle! */
+
+s.t. cap{(i,j) in edges}: y[i,j] <= 4 * x[i,j];
 /* if arc (i,j) does not belong to the salesman's tour, its capacity
    must be zero; it is obvious that on leaving a node, it is sufficient
    to have not more than n-1 cars */
 
-s.t. node{i in V}:
+s.t. node{i in nodes}:
 /* node[i] is a conservation constraint for node i */
 
-      sum{(j,i) in E} y[j,i]
+      sum{(j,i) in edges} y[j,i]
       /* summary flow into node i through all ingoing arcs */
 
       + (if i = 1 then n)
@@ -59,7 +43,7 @@ s.t. node{i in V}:
 
       = /* must be equal to */
 
-      sum{(i,j) in E} y[i,j]
+      sum{(i,j) in edges} y[i,j]
       /* summary flow from node i through all outgoing arcs */
 
       + 1;
@@ -68,17 +52,35 @@ s.t. node{i in V}:
 
 solve;
 
-printf "The sum of optimal tours is...\n";
+printf "Optimal tour has length %d\n",
+   sum{(i,j) in edges} cost[i,j] * x[i,j];
 
 data;
 
-/* VRP dataset, the depot is 1, the optimal solution is 29, given 3 different routes */
+/* Sample data set, optimal solution is 17 */
+/*
+param n := 4;
 
-param n := 9;
+param : edges : cost :=
+	1  2  4
+	1  3  5
+	1  4  7
+	2  1  4
+	2  3  6
+	2  4  5
+	3  1  5
+	3  2  6
+	3  4  3
+	4  1  7
+	4  2  5
+	4  3  3
+;
+*/
 
-param vehicles
 
-param : E : cost :=
+param n:= 9;
+
+param : edges : cost :=
   1  2  2
   1  3  10
   1  4  2
