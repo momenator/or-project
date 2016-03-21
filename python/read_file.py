@@ -10,9 +10,10 @@ node_dict = {'BB18NP' : 1,'BB54EA' : 2,'BB55QE' : 3,'BB54QB' : 4,'BB54QW' : 5,'B
 
 
 for line in txt:
-	# clean up the line and put it all in buffer 
+	# clean up the line and put it all in buffer
 	line_arr = line.split(" ")
-	cur_write_buff = str(node_dict[str(line_arr[0])]) + " " + str(node_dict[str(line_arr[1])]) + " " + line_arr[2]
+	#print line_arr
+	cur_write_buff = line_arr[0] + " " + line_arr[1] + " " + line_arr[3]
 	txt2.write(cur_write_buff)
 
 '''
@@ -21,6 +22,7 @@ for line in txt:
 	line_arr = line.split(" ")
 	txt2.write(line_arr[0] + "\n")
 '''
+
 '''
 i = 1
 txt2.write("{")
@@ -32,6 +34,16 @@ for line in txt:
 	i += 1
 
 txt2.write("}")
+'''
+
+'''
+	reading nodes_dict_coordinates
+'''
+'''
+for line in txt:
+	line_arr = line.split(" ")
+	cur_write_buff = str(node_dict[str(line_arr[0])]) + " " + str(line_arr[7]) + " " + str(line_arr[8])
+	txt2.write(cur_write_buff)
 '''
 
 print "Done reading the file. Bye now.."
