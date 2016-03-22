@@ -7,8 +7,11 @@
 # aux files
 **.aux
 
+**.toc
+
 # Generated pdf files
 **.pdf
 
 # idea IDE
-.idea/**
+.idea/
+**/.idea
