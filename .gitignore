@@ -2,4 +2,13 @@
 .DS_Store
 
 # Log files
-gurobi.log
+**.log
+
+# aux files
+**.aux
+
+# Generated pdf files
+**.pdf
+
+# idea IDE
+.idea/**
