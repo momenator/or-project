@@ -131,8 +131,8 @@ class CVRPGurobi:
 			for j in self._V:
 				# skips if j < i
 				if j != i:
-					self._c[i,j] = inDict[(i,j)]
-					#self._c[i,j] = distance(inDict[i]['x'], inDict[i]['y'], inDict[j]['x'], inDict[j]['y'])
+					#self._c[i,j] = inDict[(i,j)]
+					self._c[i,j] = distance(inDict[i]['x'], inDict[i]['y'], inDict[j]['x'], inDict[j]['y'])
 
 	def get_objective(self):
 		"""
@@ -173,8 +173,8 @@ def parse_travel_matrix(infile):
 def main(argv):
 	script, datafile = argv
 	inputData = open(datafile)
-	myModel = CVRPGurobi(9, 3, 4)
-	dDict = parse_travel_matrix(inputData)
+	myModel = CVRPGurobi(60, 5, 14)
+	dDict = parse_coordinates_matrix(inputData)
 	myModel.make_cost_matrix(dDict)
 	myModel.add_path_variables()
 	myModel.add_vehicle_constraints()

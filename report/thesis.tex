@@ -3,6 +3,7 @@
 \usepackage{blindtext}
 \usepackage[a4paper, inner=1.5cm, outer=3cm, top=3cm, bottom=3cm, bindingoffset=1cm]{geometry}
 \usepackage{fancyhdr}
+
 \fancyhf{}
 \fancyhead[LE]{\leftmark} 
 \fancyhead[RO]{\nouppercase{\rightmark}} 
@@ -16,7 +17,7 @@
 \begin{titlepage}
     \begin{center}
         \Huge
-        \textbf{Using Linear Programming to Solve Vehicle Routing Problem}
+        \textit{Linear Programming\\to\\Solve Vehicle Routing Problem}
 
         \vspace{1.5cm}
 
@@ -24,7 +25,8 @@
         
         \vspace{1.5cm}
         
-        \Large   
+        \Large
+        Submitted by:\\
         Muhammad Rafdi\\
 
         \vspace{0.8cm}
@@ -42,7 +44,9 @@
                 
         
         \normalsize   
-        This report is submitted as part requirement for the BSc Degree in Computer Science at UCL. It is substantially the result of my own work except where explicitly indicated in the text. The report may be freely copied and distributed provided the source is explicitly acknowledged.
+        This report is submitted as part requirement for the BSc Degree in Computer Science at UCL. It is substantially
+         the result of my own work except where explicitly indicated in the text. The report may be freely copied and
+          distributed provided the source is explicitly acknowledged.
 
         
     \end{center}
@@ -52,89 +56,158 @@
 
 \begin{abstract}
 \centering
-   This project examine the state of the art of linear programming and how to formulate combinatorial optimisation problems in terms of linear programs. We examine a specific problem : The vehicle routing problem and solve a few instances of it based on a given data set using different solvers. The results are then studied thoroughly.
+   This project examine the state of the art of linear programming and how to formulate combinatorial optimisation
+   problems in terms of linear programs. We examine a specific problem : The vehicle routing problem and solve a
+   few instances of it based on a given data set using different solvers. The results are then studied thoroughly.
 \end{abstract}
 
 \renewcommand{\abstractname}{Acknowledgements}
 \begin{abstract}
 \centering
- Untuk Mama dan Papa
+I would like to thank Dr Daniel Hulme for his support and encouragement. Guan Yang Song and etc...
+\end{abstract}
+
+\renewcommand{\abstractname}{}
+\begin{abstract}
+\centering
+\textit{Untuk Mama dan Papa}
 \end{abstract}
 
 \tableofcontents
 
 % chapter 1
 \chapter{Introduction}
-Insert intro here talk about a bit about linear programming (in simple terms), perhaps its history, how important it is to how it can be used to solve combinatorial optimisation problems (especially in the field of operations research) such as the travelling salesman problem and of course the vehicle routing problem.
+Insert intro here talk about a bit about linear programming \footnote{\label{note1}This is the labeled footnote blah}
+(in simple terms), talk about main components like objective function and constraints. perhaps its history, how
+important it  is to how it can be used to solve combinatorial optimisation problems (especially in the field of
+operations research) such as the travelling salesman problem and of course the vehicle routing problem. Outline the
+importance of this field in terms of contribution to the economy.
+ Give a brief intro on vehicle routing problem a problem to find the optimal route for fleet of vehicles.
 
-Insert intro here talk about a bit about linear programming (in simple terms), perhaps its history, how important it is to how it can be used to solve combinatorial optimisation problems (especially in the field of operations research) such as the travelling salesman problem and of course the vehicle routing problem.
 
 \section{Project Motivation}
-Operations research is exciting new field that is created from Linear programming. Advancement in computer science allows computationally advance method to perform or research to solve combinatorial problems using fast computers that allows problems that are too tedious to compute by hand. It is very exciting interdisciplinary field that combines mathematics and computer science.  Would like to experience what OR analyst solve on day to day basis etc. Would like to apply mathematical models that have been developed for years to solve real world scenarios. Also maybe teach how people to make mathematical model?
+Operations research is exciting new field that is created from Linear programming. Advancement in computer science
+allows computationally advance method to perform or research to solve combinatorial problems using fast computers that
+allows problems that are too tedious to compute by hand. It is very exciting interdisciplinary field that combines
+mathematics and computer science.  Would like to experience what OR analyst solve on day to day basis etc. Would like
+to apply mathematical models that have been developed for years to solve real world scenarios. Also maybe teach how
+people to make mathematical model?
 
 \section{Aims and Scope of Project}
-1) Thorough understanding linear programming as a method to solve combinatorial optimisation problems
-2) Model a vehicle routing problem based on real world scenario and dataset
-3) Obtain the optimized results (the minimum distance and the paths).
-4) Compare and contrast different tools used to get the results
+\begin{enumerate}
+\item To thoroughly understand linear programming as a method to solve combinatorial optimisation problems.
+\item Model a vehicle routing problem based on real world scenario.
+\item Obtain the optimised results (the minimum distance and the paths) using the software suites.
+\item Compare and contrast different tools used to get the results.
+\end{enumerate}
 
-Will not attempt to create new algorithms or implement of linear programming solver!
+Will not: attempt to create new algorithms or implement of linear programming solver.
+Will assume that the air distance instead of road distance.
 
 \section{Methodology}
-Understand the given problem and model it in terms of linear program. Model the linear program using the given tools and solve it. Verify the model is privides the correct solution by using a test data set in which the correct solution is known in advance. Compare and contrast the results obtained from different tools.
-
-Understand the given problem and model it in terms of linear program. Model the linear program using the given tools and solve it. Verify the model is privides the correct solution by using a test data set in which the correct solution is known in advance. Compare and contrast the results obtained from different tools.
+Understand the given problem and model it in terms of linear program.\\
+Model the linear program using the given tools and solve it. \\
+Verify the model is privides the correct solution by using a test data set in which the correct solution
+is known in advance. \\
+Compare and contrast the results obtained from different tools.
 
 % chapter 2
+\chapter{Theory}
+In this section I will talk a bit on the theory of Linear programming which explains how linear programs find the optimal
+solution for combinatorial optimisation problem.
+
+\section{Linear Programming}
+Definitive meaning of linear programming. Explain that it is NOT a programing paradigm and the word 'programming'
+is understood as a mathematical method here. Talk about Objective function, constraints, modelling a simple problem
+and the simplex algorithm.
+
+\section{Integer Programming}
+Definition and added constraints, why is it 'harder' than linear programming and branch and bound algorithm to
+find the solution. Last but not least, explain that there are MIP (mixed integer programs that contain both integral and
+real constraints.)
+
+\section{Heuristics and Metaheuristics}
+Different heuristics to approximate the optimal solution. Why we need this? Why do we approximate the solution.
+
+\section{Constraints Programming}
+Programming paradigm that is implemented within LP solver. Refer to the Google documentation on this.
+
+% chapter 3
 \chapter{Vehicle Routing Problem}
 In this section I will talk about vehicle routing problem
 \section{Definition}
-First introduce the classic travelling salesperson problem, describe the entities (edges, nodes cost, subtour elimination, objective function etc) that are present within the problem. Then add more constraints to formulate the VRP problem. Also mention the equations.
+First introduce the classic travelling salesperson problem, describe the entities (edges, nodes cost, subtour
+elimination, objective function etc) that are present within the problem. Then add more constraints to formulate
+the VRP problem. Also mention the equations.
 
 \section{Specification}
-In this section, describe the problem of the given dataset. Given 227 nodes including depot, we want to formulate the capacitated routing problem with each vehicle visiting at most K number of nodes. Capacity don’t really matter, assume that demands are all the same. Make all demands for all cities the same and capacity to the number of cities the node can visit. Also introduce time window variable. Perhaps can formulate time window like  capacity constraint, or perhaps model time window in terms of the times in which the vehicle must arrive.
+In this section, describe the problem of the given dataset. Given 227 nodes including depot, we want to formulate
+the capacitated routing problem with each vehicle visiting at most K number of nodes. Capacity don’t really matter,
+ assume that demands are all the same. Make all demands for all cities the same and capacity to the number of
+ cities the node can visit. Also introduce time window variable. Perhaps can formulate time window like
+ capacity constraint, or perhaps model time window in terms of the times in which the vehicle must arrive.
 
 \section{Variants}
+Multi depot CVRP and so on..
 
 \section{Computational Complexity}
-
-just a simple section. This would be your report. Learn latex properly okay. Loreme ipsum dolor amet. Hahahah good one. CS is fun!
-%this is a comment you won't see it in your pdf!
-
-New paragraph! This is exciting. Learn latex properly okay. Loreme ipsum dolor amet. Hahahah good one. CS is fun! \LaTeX\ and \TeX\ is fun!
-
-% chapter 3
-\chapter{Theory}
-just a simple section. This would be your report. Learn latex properly okay. Loreme ipsum dolor amet. Hahahah good one. CS is fun!
-
-New paragraph! This is exciting. Learn latex properly okay. Loreme ipsum dolor amet. Hahahah good one. CS is fun! \LaTeX\ and \TeX\ is fun!
-\section{Linear Programming}
-
-\section{Integer Programming}
-
-\section{Heuristics}
-
-\section{Constraints Programming}
+It is NP hard and show them why (proof is even better...)
 
 
 % chapter 4
 \chapter{Implementation}
 
 \section{Tools}
+\subsection{Gurobi}
+\subsection{Google Optimization Tools}
+\subsection{Optaplanner}
 
 \section{Data sets}
 
 \section{Optimisation Model}
 \subsection{Sets, Parameters and Variables}
 \subsection{Capacitated Vehicle Routing Problem Model}
-\subsection{Capacitated Vehicle Routing Problem with Time W Model}
+\subsection{Capacitated Vehicle Routing Problem with Time Window Model}
 
 % chapter 5
-\chapter{Results}
+\chapter{Results and Discussions}
+\section{Results}
+\begin{enumerate}
+\item The optimal solution in terms of scaled and metric distance (from Optaplanner)
+\item The routes that for each of the vehicle
+\item Number of vehicle used (/< 16)
+\item Make recommendations for the company (how many vehicles to use, which route etc...)
+\item Compare and contrast different tools used to get the results of the CVRP 60 node analyses. Compare time taken and obj value.
+\item Route Visualisation (taken from Optaplanner)
+\item Any failed attempt at modelling the problem (GLPK, and part of the or-tools etc)..
+\end{enumerate}
 
+\section{Discussions}
+\begin{enumerate}
+\item How accurate is the model compared to the real life scenario?
+\item How accurate is the solution from the global optimum? (if possible)
+\item Discuss the obj value obtained from the comparison and discuss how the formulation may affect the results.
+\item Advantages and Disadvantages of using each tool and suggest which tool to use given user profile.
+\item Anything that went wrong
+\end{enumerate}
 
 % chapter 6
-\chapter{Conclusion}
+\chapter{Conclusions and Future Work}
+In here I shall conclude a few things: we've started off with a primer on linear programming and discussed its state
+ of the art. Obtained the optimal routes that yields the minimum distance and the number of vehicles to use. Made
+ recommendations based on those findings to the company. Also compare and contrast the tools used for optimisation. Also
+ included anything that went wrong during the project
+
+\textbf{Future Work}
+More accurate model with road distance and taking into account traffic conditions (traffic jam etc). Model
+ different variants of the problem, such as Multi depot cvrp etc. Dive into the source  code / manual of
+ the tools to further understand how it works and use them to get better results.
+
+\chapter{References}
+Insert References here....
+
+\chapter{Appendices}
+Insert Appendices here...
 
 \end{document}
 
