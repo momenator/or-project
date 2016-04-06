@@ -1,0 +1,30 @@
+\BOOKMARK [0][-]{chapter.1}{One}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Project Motivation}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Goals and Scope of Project}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Methodology}{chapter.1}% 4
+\BOOKMARK [0][-]{chapter.2}{Theory}{}% 5
+\BOOKMARK [1][-]{section.2.1}{Linear Programming}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.2}{Integer Programming}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.3}{Constraints Programming}{chapter.2}% 8
+\BOOKMARK [0][-]{chapter.3}{Vehicle Routing Problem}{}% 9
+\BOOKMARK [1][-]{section.3.1}{Problem Statement}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.2}{Problem Definition}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.3}{VRP Variants}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.4}{VRP Heuristics}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.5}{Computational Complexity}{chapter.3}% 14
+\BOOKMARK [0][-]{chapter.4}{Implementation}{}% 15
+\BOOKMARK [1][-]{section.4.1}{Tools}{chapter.4}% 16
+\BOOKMARK [2][-]{subsection.4.1.1}{Gurobi}{section.4.1}% 17
+\BOOKMARK [2][-]{subsection.4.1.2}{Google Optimization Tools}{section.4.1}% 18
+\BOOKMARK [2][-]{subsection.4.1.3}{Optaplanner}{section.4.1}% 19
+\BOOKMARK [1][-]{section.4.2}{Data sets}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.3}{Optimisation Model}{chapter.4}% 21
+\BOOKMARK [2][-]{subsection.4.3.1}{Sets, Parameters and Variables}{section.4.3}% 22
+\BOOKMARK [2][-]{subsection.4.3.2}{Capacitated Vehicle Routing Problem Model}{section.4.3}% 23
+\BOOKMARK [2][-]{subsection.4.3.3}{Capacitated Vehicle Routing Problem with Time Window Model}{section.4.3}% 24
+\BOOKMARK [0][-]{chapter.5}{Results and Discussions}{}% 25
+\BOOKMARK [1][-]{section.5.1}{Results}{chapter.5}% 26
+\BOOKMARK [1][-]{section.5.2}{Discussions}{chapter.5}% 27
+\BOOKMARK [0][-]{chapter.6}{Conclusions and Future Work}{}% 28
+\BOOKMARK [0][-]{chapter.7}{References}{}% 29
+\BOOKMARK [0][-]{chapter.8}{Appendices}{}% 30
