@@ -6,6 +6,7 @@
 \usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage[toc,page]{appendix}
+\usepackage{hyperref}
 
 \fancyhf{}
 \fancyhead[LE]{\leftmark}
@@ -105,10 +106,12 @@ routing they face.
 Aside from financial benefits, the vehicle routing problem is an interesting problem to the mathematically and computationally apt individuals.
 There are wide variety of algorithms that can be used to approximate the optimal solution.
 
-A study on the comparison of popular tools to do linear programming has not been not been done before. It will be useful to see the comparison
-of different tools as it will help OR analysts to decide which tool is the best for them given their current needs. The reader might be
-wondering, why these three tools? It is because these are some of the most popular tools used out there that is relatively well documented and
-has an easy to use APIs in various programming languages including Python, the language that we use in this project.
+A study on the comparison of solvers has been done before in \[inser bib here\]. However, it does not include other open souce LP tools
+such as or-tools and Optaplanner, both of which contains their own unique engine to solve LP problems. It will be useful to see the comparison
+of different tools as it will help OR analysts to decide which tool is the best for them given their current needs. We have chosen the 3 tools mentioned
+because they are relatively popular tools used in the industry there that is relatively well documented and
+has an easy to use APIs in various programming languages including Python, the language that we use in this project. Most importantly, they have not
+been compared alongside one another.
 
 \section{Goals and Scope of Project}
 We have identified a few goals to benchmark this project and a scope to limit the discussions that may have been related to this project. The goals are as
@@ -537,17 +540,67 @@ Comment on the performance of linear program against other method
 % chapter 4
 \chapter{Implementation}
 
-This chapter contains the bulk of the analysis of the VRP problem. We will discus the implementation and testing of the model
-using the 3 different
+This chapter contains the bulk of the analysis of the VRP problem. In this chapter We will discus the implementation and testing of the model
+using the chosen tools.
 
 \section{Tools}
-Gurobi
-Google Optimization Tools
-Optaplanner
+In this project, we will be using LP tools: Gurobi, Google Optimization Tools, Optaplanner to solve the problem
+defined in the previus chapter. These tools have their own unique APIs and input format. Each of them
+have different implementation of the LP solver that causes them to produce different results given the same input,
+as we shall see in the next chapter.
 
-\section{Data sets}
+Gurobi is a optimisation tool built for solving LP based problems. Its LP solver is written in C and it comes with
+APIs to port many different programming languages including Java, C++, Python and a few others. Gurobi allows you
+to build any models for any LP problem, giving users full control to implement any algorithms or heuristics that they
+prefer. It claims to be the fastest solver amongst 3 other open source solvers\footnote{refer to
+this link}, none of which are used in this project. Gurobi is one of the most expensive commercial LP solver in the industry
+and its used by many corporations such as FedEx, Netflix and Google. Academic licenses is also available for universities
+and its affiliated individuals for free.
 
-\section{Optimisation Model}
+or-tools by Google is an optimisation suite for solving various optimisation problems, including VRP. It contains a constraint programming
+solver, unified interface for other solvers (e.g Gurobi, GLPK, CPLEX, etc), implemented mostly in C++. Like Gurobi, it also comes with APIs
+to support other major programming languages, albeit less variety. This tool allows to focus on modelling the problem at hand, without worrying
+too much about the algorithms and the heuristics, as they have been implemented and packaged with the solver. It is an open souce
+software that is used in internally at Google that offers various advantages such as: high quality, portability, has active user community.
+
+Optaplanner is an constraint programming engine built in Java for solving optimisation problems. Unlike the other two solvers, it does not
+have API to support other languages. In addition, it takes the input in the form of XML file, which are then processed by the engine. It has
+predefined XML tags used to model various problems and built-in implementation of algorithms and heuristics for solving them. What Optaplanner
+lacks in portability, it makes it up in usability. The XML input format allows users to define the problem rather than implementing the procedures
+to solve the problem. In addition to usability, it comes with a nice GUI that visualise common optimisation, including the VRP.
+
+These tools are run on the same hardware. The processor of this hardware is 2.8GHz dual-core Intel i5. It has
+8GB 1600 MHz DDR3 memory and is running OSX version 10.9.5.
+
+\section{Datasets}
+We have prepared 3 datasets for this project. The first one is a benchmark dataset with known solution to test the tools
+if they can find the optimal solution in a small instance. The next dataset is used to compare the compare the performance
+of the tools under a time limit. The last datasets are the dataset of the actual problem given by the company. All datasets
+share the same schema: Node number, Latitude and Longitude.
+
+The details of the 3 datasets are tabulated in the table below:
+\begin{table}[!ht]
+    \begin{center}
+        \begin{tabular}{ | l | l | p{10.5cm} |}
+        \hline
+        Name & Size  & Description \\ \hline
+        CVRP-9 & 9 nodes  & This is benchmark dataset that is used to build a simple CVRP model to test
+        if the LP tools can produce an optimal solution that are close to the known solution under a small load. The vertices in the datasets
+        are arranged in such a way that the optimal routes are obvious and can be obtained without calculation.\\ \hline
+        CVRP-60 & 60 nodes & This is a dataset that is used to model a CVRP model that is used to compare the performance of tools
+        under a time limit of 5 minutes. We take the results generated and compare their optimality.\\ \hline
+        CVRP-227 & 227 nodes & This dataset is the actual problem dataset from the company. It is used to model both CVRP and CVRPTW models
+        in this project. This dataset can be used to model CVRPTW model even without time windows data because the time window variables are uniform across
+        all customers. \\
+        \hline
+        \end{tabular}
+        \caption{Datasets description}
+        \label{table:dataset_description}
+    \end{center}
+\end{table}
+
+\section{Model Parameters}
+The model parameters are variables that is For CVRP-9 and CVRP-60, the parameters are similar
 Sets, Parameters and Variables
 Capacitated Vehicle Routing Problem Model
 Capacitated Vehicle Routing Problem with Time Window Model
