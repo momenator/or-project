@@ -1,0 +1,93 @@
+% chapter 1
+\chapter{Introduction}
+Linear Programming is a mathematical method to find an optimal value of a function in a linear system under a set of
+constraints. This method has been around since the 19th century, but it was not fully developed until the World War 2,
+where it was used for resources planning. Since its conception, this method has been widely used to solve problems
+in Applied Mathematics and Operations Research (OR). Along with the advancement of computing, companies can now increase their
+decision making capabilities with efficient technique of linear programming and significant computational power.
+
+Linear programming is used to model to many combinatorial problems, such as vehicle routing.
+The vehicle routing problem is a common problem that is commonly observed in logistics.
+It is a special instance of the famous traveling salesperson problem in which the tour of
+all 'cities' in the given graph into several parts, subject the availability of resources.
+
+In this project, we will conduct an Operations Research study by using linear programming to find the optimal routes of an instance of a vehicle routing
+problem. We will use three linear programming tools to arrive at a solution and compare and contrast the results of each one of them.
+
+\section{Project Motivation}
+Linear programming has allowed organisations to optimise many aspects its operations. In many occasions, the problem involves
+finding the optimal combination of input that yields the greatest output. Amongst the many problems,
+vehicle routing is one of them. Many studies have been carried out on this problem due to its role in minimising operational
+costs of companies, especially in their logistics department. Logistic plays a significant role in many businesses and it is one of the major
+driving force of the economy. In the UK alone, Logistics and Posts Sector is worth approximately
+\pounds55bn to the economy and comprises 5 percent of the GDP\footnote{According to a logistics report by PWC }.
+In the US, the cost attributed to logistics rose up to US\$1.45 trillion in 2014, an increase of 3.1 percent from the previous year.
+These figures are likely to increase given the increasingly globalised economy. Thus, minimising operational costs will not only make companies
+more competitive, but it will also increase their profits.
+
+In this project, we want to simulate a scenario where we can optimise
+a problem to minimise cost in a fictional delivery company DFFS. We will demonstrate how optimisation can help them solve a vehicle
+routing they face.
+
+Aside from financial benefits, the vehicle routing problem is an interesting problem to the mathematically and computationally apt individuals.
+There are wide variety of algorithms that can be used to approximate the optimal solution.
+
+A study on the comparison of solvers has been done before in this paper. However, it does not include other open souce LP tools
+such as or-tools and Optaplanner, both of which contains their own unique engine to solve LP problems. It will be useful to see the comparison
+of different tools as it will help OR analysts to decide which tool is the best for them given their current needs. We have chosen the 3 tools mentioned
+because they are relatively popular tools used in the industry there that is relatively well documented and
+has an easy to use APIs in various programming languages including Python, the language that we use in this project. Most importantly, they have not
+been compared alongside one another.
+
+\section{Goals and Scope of Project}
+We have identified a few goals to benchmark this project and a scope to limit the discussions that may have been related to this project. The goals are as
+follows:
+\begin{enumerate}
+\item To thoroughly understand linear programming method to solve optimisation problems.
+\item To build a mathematical model of the vehicle routing problem based on the given dataset.
+\item Obtain the optimised results (the minimum distance and the paths) using the chosen tools.
+\item Compare and contrast the results and the usage of those tools.
+\end{enumerate}
+
+Creating novel algorithms for optimisation problems is hard and requires years of experience in Algorithms.
+Implementing linear programming solver is also difficult and it requires very high level of software engineering expertise, in addition to
+the algorithmic knowledge mentioned. For these reasons, we will not be attempting to create new algorithms or implement linear programming solvers to solve
+the vehicle routing problem. Instead we will model the VRP instance using softwares and algorithms that are already available.
+In addition, other methods that can be used to solve this problem such as \textit{genetic programming} and \textit{dynamic programming} will
+not be covered in this project.
+
+\section{Methodology}
+Peforming the calculations for linear programming is not as hard as it used to be given the availability of computing power that we have today.
+In this project we will be using three applications: Gurobi, OR Tools by Google and Optaplanner to retrieve the optimal solution. Each of them
+contains their own implementation of \textbf{linear programming solver}, a program that can solve linear programming problems. We model them
+in a form that can be solved by these solvers and used the solvers to obtain the solution.
+
+This project will be carried out in seven steps, as per the steps taken in a typical OR study:
+
+\begin{enumerate}
+\item Define the problem in a given system and formulate it into a linear program. A linear program is a problem that can be solved
+using linear programming. In this step, the objective and the constraints of the system is studied thoroughly to ensure
+that the program models the given problem correctly.
+\item Collect the data that represents the problem at hand and estimated the parameters that are required to produce
+the optimal result.
+\item Create the mathematical models of the given problem. We will use standard linear programming notation to build these models. This is
+also the step in which we implement the linear program using the chosen softwares.
+\item Verify that the model is correct. We achieve this by running the implemented linear program through a benchmark dataset with known solution.
+\item Select suitable alternative. We may not always get the desired answer, due various reasons such as limited timescale and computing resources.
+In this case, we want to select an alternative objectives that will be useful to the parties involved.
+\item Run the given problem in the models that we have build and record their result and performance. We may need to go back to step 1 if the results obtained
+are not satisfactory.
+\item Provide recommendations to the parties involved based on the results obtained.
+\end{enumerate}
+
+For comparing the performance of different linear programming tools, we use a 60 node CVRP model. Time limit of 5 minutes is imposed
+when running the model on all tools. The optimal distances obtained using each tools will be recorded and compared. In addition, the usage
+of the tools will also be discussed.
+
+We use a lot of terminologies interchangeably here such as blah blah blah. This serves as a heads up to the reader... more explanation needed here..
+
+\section{Outline}
+In chapter 2, we will elaborate the underlying theory behind linear programming and its state of the art.
+The vehicle routing problem will be discussed in detail in chapter 3. The implentation of linear programming to solve the vehicle routing problem will be
+discussed in chapter 4, followed by the results in chapter 5. Finally, I will conclude the results and identify potential future works
+of this project in chapter 6.
