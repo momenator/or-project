@@ -57,6 +57,7 @@ def generate_cvrp(input_file, vehicle, vehicle_capacity):
 	id_counter = 1
 	depot_id = 1
 	location_id = []
+	demandDict = {}
 	# can be replaced with an array if the nodes have different demands
 
 
@@ -99,6 +100,7 @@ def generate_cvrp(input_file, vehicle, vehicle_capacity):
 
 		if lineArgs[0] != '1':
 			location_id.append(id_counter)
+			demandDict[id_counter] = str(int(float(lineArgs[3])))
 
 		id_counter+=1
 
@@ -146,7 +148,7 @@ def generate_cvrp(input_file, vehicle, vehicle_capacity):
 		VrpCustomerLocation = SubElement(VrpCustomerElem, 'location', clas='VrpAirLocation', reference=str(i))
 
 		VrpCustomerDemand = SubElement(VrpCustomerElem, 'demand')
-		VrpCustomerDemand.text = '1'
+		VrpCustomerDemand.text = demandDict[i]
 
 		id_counter += 1
 
@@ -185,6 +187,7 @@ def generate_cvrptw(input_file, vehicle, vehicle_capacity):
 	id_counter = 1
 	depot_id = 1
 	location_id = []
+	demandDict = {}
 	# can be replaced with an array if the nodes have different demands
 
 	#time window variables
@@ -232,6 +235,7 @@ def generate_cvrptw(input_file, vehicle, vehicle_capacity):
 
 		if lineArgs[0] != '1':
 			location_id.append(id_counter)
+			demandDict[id_counter] = str(int(float(lineArgs[3])))
 
 		id_counter+=1
 
@@ -300,7 +304,7 @@ def generate_cvrptw(input_file, vehicle, vehicle_capacity):
 	return prettify(VrpTimeWindowedVehicleRoutingSolution)
 
 if __name__ == '__main__':
-	input_data_file = open('../dataset/cvrp_60.txt', 'r')
-	res = generate_cvrp(input_data_file, 5, 15)
+	input_data_file = open('../dataset/augerat/A-n80-k10-parsed.txt', 'r')
+	res = generate_cvrp(input_data_file, 10, 100)
 	res_xml = open('./res.xml', "w")
 	res_xml.write(res)

@@ -1,0 +1,64 @@
+This is BibTeX, Version 0.99d (TeX Live 2014)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: thesis.aux
+A level-1 auxiliary file: report/chapters/chapter1.aux
+A level-1 auxiliary file: report/chapters/chapter2.aux
+A level-1 auxiliary file: report/chapters/chapter3.aux
+A level-1 auxiliary file: report/chapters/chapter4.aux
+A level-1 auxiliary file: report/chapters/chapter5.aux
+A level-1 auxiliary file: report/chapters/chapter6.aux
+The style file: ieeetr.bst
+A level-1 auxiliary file: report/chapters/appendixA.aux
+Database file #1: report/chapters/references.bib
+Warning--I didn't find a database entry for "here"
+Warning--empty publisher in Sottinen2009
+Warning--empty journal in Meindl2012
+Warning--empty journal in Augerat1998
+Warning--empty journal in Bockmayr2003
+Warning--empty publisher in wilson1996
+Warning--empty journal in Miller1960
+Warning--empty journal in Pataki2003
+Warning--empty journal in Pataki2000
+Warning--empty journal in Laporte1999
+You've used 30 entries,
+            1876 wiz_defined-function locations,
+            639 strings with 7401 characters,
+and the built_in function-call counts, 4723 in all, are:
+= -- 412
+> -- 195
+< -- 0
++ -- 82
+- -- 52
+* -- 249
+:= -- 711
+add.period$ -- 45
+call.type$ -- 30
+change.case$ -- 24
+chr.to.int$ -- 0
+cite$ -- 39
+duplicate$ -- 232
+empty$ -- 576
+format.name$ -- 52
+if$ -- 1160
+int.to.chr$ -- 0
+int.to.str$ -- 30
+missing$ -- 24
+newline$ -- 110
+num.names$ -- 29
+pop$ -- 186
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 82
+stack$ -- 0
+substring$ -- 48
+swap$ -- 25
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 9
+while$ -- 33
+width$ -- 32
+write$ -- 255
+(There were 10 warnings)

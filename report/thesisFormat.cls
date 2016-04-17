@@ -512,7 +512,7 @@ wish to left align your text}
 \newcommand{\collegeshield}[1]{\renewcommand{\@collegeshield}{#1}\PHD@collegeshieldtrue}
 
 % Submission Text
-\newcommand{\submissiontext}{This final year project is submitted for the degree of }
+\newcommand{\submissiontext}{}
 
 
 % keywords (These keywords will appear in the PDF meta-information
@@ -597,13 +597,13 @@ wish to left align your text}
 % Crest
 
 \ifPHD@collegeshield%
-	\vspace{.15\PHD@titlepagespacing}
+	\vspace{.07\PHD@titlepagespacing}
 	{\usebox{\PHD@collegecrest}}
-	\vspace{.1\PHD@titlepagespacing}
+	\vspace{.04\PHD@titlepagespacing}
 \else
-	\vspace{.25\PHD@titlepagespacing}
+	\vspace{.1\PHD@titlepagespacing}
 	{\usebox{\PHD@crest}}
-	\vspace{.15\PHD@titlepagespacing}
+	\vspace{.05\PHD@titlepagespacing}
 \fi
 
 
@@ -612,20 +612,24 @@ wish to left align your text}
 {\usebox{\PHD@author}}
 \vspace*{1em}
 
+% Submission Text
+{\usebox{\PHD@submission}}
+\vspace*{1em}
 
 % Department and University
 {\usebox{\PHD@dept}}
-\vspace{.2\PHD@titlepagespacing}
+\vspace{.15\PHD@titlepagespacing}
 
-% Submission Text
-{\usebox{\PHD@submission}}
-
+This report is submitted as part requirement for the BSc Degree in Computer Science at UCL. It is substantially
+ the result of my own work except where explicitly indicated in the text. The report may be freely copied and
+  distributed provided the source is explicitly acknowledged.
 \end{center}
 
 % College and degree date
 \vfill
 {\usebox{\PHD@collegedate}}
 \end{singlespace}
+
 }
 
 
@@ -661,6 +665,15 @@ wish to left align your text}
 \vfill
 }
 
+% ******************************* disclaimer **********************************
+% The declaration environment puts a large, bold, centered
+% "Declaration" label at the top of the page.
+
+\newenvironment{disclaimer}{
+
+\setsinglecolumn
+\thispagestyle{empty}
+}
 
 % ******************************* abstract v2 **********************************
 % The declaration environment puts a large, bold, centered

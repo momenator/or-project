@@ -1,29 +1,44 @@
 \thispagestyle {empty}
 \select@language {english}
-\contentsline {chapter}{List of Figures}{iv}{chapter*.4}
-\contentsline {chapter}{List of Tables}{v}{chapter*.5}
+\contentsline {chapter}{List of Figures}{iv}{chapter*.3}
+\contentsline {chapter}{List of Tables}{v}{chapter*.4}
 \contentsline {chapter}{\numberline {1}Introduction}{6}{chapter.1}
-\contentsline {section}{\numberline {1.1}Project Motivation}{6}{section.1.1}
-\contentsline {section}{\numberline {1.2}Goals and Scope of Project}{7}{section.1.2}
-\contentsline {section}{\numberline {1.3}Methodology}{8}{section.1.3}
-\contentsline {section}{\numberline {1.4}Outline}{9}{section.1.4}
-\contentsline {chapter}{\numberline {2}Theory}{10}{chapter.2}
-\contentsline {section}{\numberline {2.1}Linear Programming}{10}{section.2.1}
-\contentsline {section}{\numberline {2.2}Integer Programming}{12}{section.2.2}
-\contentsline {section}{\numberline {2.3}Constraints Programming}{15}{section.2.3}
-\contentsline {chapter}{\numberline {3}Vehicle Routing Problem}{17}{chapter.3}
-\contentsline {section}{\numberline {3.1}Problem Statement}{17}{section.3.1}
-\contentsline {section}{\numberline {3.2}Problem Definition}{18}{section.3.2}
-\contentsline {section}{\numberline {3.3}Solution methods for VRP}{22}{section.3.3}
-\contentsline {section}{\numberline {3.4}Computational Complexity}{22}{section.3.4}
-\contentsline {chapter}{\numberline {4}Implementation}{23}{chapter.4}
-\contentsline {section}{\numberline {4.1}Tools}{23}{section.4.1}
-\contentsline {section}{\numberline {4.2}Datasets}{24}{section.4.2}
-\contentsline {section}{\numberline {4.3}Model Parameters}{24}{section.4.3}
-\contentsline {section}{\numberline {4.4}Model Implementations}{24}{section.4.4}
-\contentsline {chapter}{\numberline {5}Results and Discussions}{26}{chapter.5}
-\contentsline {section}{\numberline {5.1}Results}{26}{section.5.1}
-\contentsline {section}{\numberline {5.2}Discussions}{26}{section.5.2}
-\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{28}{chapter.6}
-\contentsline {chapter}{\numberline {7}References}{29}{chapter.7}
-\contentsline {chapter}{\numberline {A}First Appendix}{30}{appendix.A}
+\contentsline {section}{\numberline {1.1}Project Motivation}{7}{section.1.1}
+\contentsline {section}{\numberline {1.2}Related Works}{8}{section.1.2}
+\contentsline {section}{\numberline {1.3}Goals and Scope of Project}{8}{section.1.3}
+\contentsline {section}{\numberline {1.4}Methodology}{9}{section.1.4}
+\contentsline {section}{\numberline {1.5}Terminologies}{10}{section.1.5}
+\contentsline {section}{\numberline {1.6}Outline}{10}{section.1.6}
+\contentsline {chapter}{\numberline {2}Context}{11}{chapter.2}
+\contentsline {section}{\numberline {2.1}Linear Programming}{11}{section.2.1}
+\contentsline {section}{\numberline {2.2}Integer Programming}{15}{section.2.2}
+\contentsline {section}{\numberline {2.3}Constraints Programming}{17}{section.2.3}
+\contentsline {section}{\numberline {2.4}Tools}{18}{section.2.4}
+\contentsline {section}{\numberline {2.5}Graph Theory}{19}{section.2.5}
+\contentsline {section}{\numberline {2.6}Computational Complexity}{19}{section.2.6}
+\contentsline {section}{\numberline {2.7}Review}{20}{section.2.7}
+\contentsline {chapter}{\numberline {3}Analysis and Requirements}{21}{chapter.3}
+\contentsline {section}{\numberline {3.1}Problem Statement}{21}{section.3.1}
+\contentsline {section}{\numberline {3.2}Mathematical Formulation}{22}{section.3.2}
+\contentsline {section}{\numberline {3.3}Solution Methods}{26}{section.3.3}
+\contentsline {section}{\numberline {3.4}Requirements}{27}{section.3.4}
+\contentsline {section}{\numberline {3.5}Review}{27}{section.3.5}
+\contentsline {chapter}{\numberline {4}Implementation}{28}{chapter.4}
+\contentsline {section}{\numberline {4.1}Hardware and LP Tools Specification}{28}{section.4.1}
+\contentsline {section}{\numberline {4.2}Datasets}{28}{section.4.2}
+\contentsline {section}{\numberline {4.3}Model Parameters}{29}{section.4.3}
+\contentsline {section}{\numberline {4.4}Model Implementations}{29}{section.4.4}
+\contentsline {section}{\numberline {4.5}Review}{31}{section.4.5}
+\contentsline {chapter}{\numberline {5}Results and Discussions}{32}{chapter.5}
+\contentsline {section}{\numberline {5.1}Results}{32}{section.5.1}
+\contentsline {section}{\numberline {5.2}Discussions}{33}{section.5.2}
+\contentsline {section}{\numberline {5.3}Review}{36}{section.5.3}
+\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{38}{chapter.6}
+\contentsline {chapter}{Bibliography}{39}{chapter*.19}
+\contentsline {chapter}{Appendix \numberline {A}Installations}{41}{Appendix.a.A}
+\contentsline {chapter}{Appendix \numberline {B}User Manual}{42}{Appendix.a.B}
+\contentsline {chapter}{Appendix \numberline {C}Datasets}{43}{Appendix.a.C}
+\contentsline {chapter}{Appendix \numberline {D}Test Results}{45}{Appendix.a.D}
+\contentsline {chapter}{Appendix \numberline {E}Evaluation Results or Dat}{46}{Appendix.a.E}
+\contentsline {chapter}{Appendix \numberline {F}Project Plan and Interim Report}{47}{Appendix.a.F}
+\contentsline {chapter}{Appendix \numberline {G}Code Listings}{48}{Appendix.a.G}

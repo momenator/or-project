@@ -1,6 +1,7 @@
 import math
 import random
 import networkx
+import os
 from gurobipy import *
 
 class CVRPGurobi:
@@ -127,7 +128,10 @@ class CVRPGurobi:
 		self._V = range(1, self._nodes + 1)
 		for i in self._V:
 			# sets the demand for all depots to be 1
-			self._q[i] = 1
+			if i == 1:
+				self._q[i] = 0
+			else:
+				self._q[i] = 1
 			for j in self._V:
 				# skips if j < i
 				if j != i:
@@ -150,7 +154,7 @@ def parse_coordinates_matrix(infile):
 	for line in infile:
 		line.replace("\n","")
 		lineArg = line.split(" ")
-		coordinatesDict[int(lineArg[0])] = {'x':float(lineArg[1]) ,'y':float(lineArg[2])}
+		coordinatesDict[int(lineArg[0])] = {'x':float(lineArg[1]) ,'y':float(lineArg[2]) }
 	return coordinatesDict
 
 """
@@ -173,25 +177,24 @@ def parse_travel_matrix(infile):
 def main(argv):
 	script, datafile = argv
 	inputData = open(datafile)
-	myModel = CVRPGurobi(60, 5, 14)
+	myModel = CVRPGurobi(60, 5, 15)
 	dDict = parse_coordinates_matrix(inputData)
 	myModel.make_cost_matrix(dDict)
 	myModel.add_path_variables()
 	myModel.add_vehicle_constraints()
 	myModel.add_objective_function()
 	myModel.optimise()
-	print "Optimal solution:" , myModel.get_objective()
-	print "Edges:", len(myModel._E)
-	print "Xs", myModel._x
-	paths = []
-	for key in myModel._x:
-		if myModel._x[key].getAttr('X') > 0:
-			paths.append(key)
-	print paths
+	print "Optimal solution:" , round(myModel.get_objective(),1)
+
+
 
 if __name__ == "__main__":
 	from sys import argv
+	start = os.times()
 	if (len(argv) > 1):
 		main(argv)
 	else:
 		print "Usage: python script_file data_file"
+	end = os.times()
+	# user time, system time, children user time, children system time, and elapsed real time since a fixed point in the past
+	print "Time taken: ", end[-1] - start[-1]

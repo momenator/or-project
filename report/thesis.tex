@@ -3,6 +3,12 @@
 \usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage{tikz}
+\usepackage{multirow}
+\usepackage[T1]{fontenc}
+\usetikzlibrary{shapes,arrows}
+\usepackage[parfill]{parskip}
+\urlstyle{same}
+
 
 \usepackage{graphicx}
 \usepackage{caption}
@@ -23,13 +29,13 @@
 \title{\textit{Linear Programming to Solve\\Vehicle Routing Problem}}
 
 %% Subtitle (Optional)
-\subtitle{\textit{A Project on Optimisation of Route Planning and Analysis of Linear Programming Tools}}
+\subtitle{\textit{A Project on Tour Optimisation and Analysis of Linear Programming Tools}}
 
 %% The full name of the author
 \author{Muhammad Rafdi}
 
 %% Department (eg. Department of Engineering, Maths, Physics)
-\dept{Department of Engineering Science}
+\dept{Department of Computer Science}
 
 %% University and Crest
 \university{University College London}
@@ -37,7 +43,7 @@
 \crest{\includegraphics[width=0.45\textwidth]{ucl-logo.jpg}}
 
 %% Full title of the Degree
-\degreetitle{Bachelor of Science}
+\degreetitle{BSc Computer Science}
 
 \college{Supervisor: Dr Daniel Hulme}
 
@@ -53,20 +59,23 @@
   \maketitle
 \end{titlepage}
 
-\begin{declaration}
-
-This report is submitted as part requirement for the BSc Degree in Computer Science at UCL. It is substantially
-the result of my own work except where explicitly indicated in the text. The report may be freely copied and
-distributed provided the source is explicitly acknowledged.
-
-\end{declaration}
-
-
 \begin{abstract2}
 
-   This project examine the state of the art of linear programming and how to formulate combinatorial optimisation
-   problems in terms of linear programs. We examine a specific problem : The vehicle routing problem and solve a
-   few instances of it based on a given data set using different solvers. The results are then studied thoroughly.
+    Linear programming is a method to find the optimal solution to combinatorial optimisation problems. One of those
+    problems, is the vehicle routing problem (VRP). VRP has been studied decades due to its difficulty in finding the optimal solution
+     and wide range og applications in the real world.
+    In this project, we will be using linear programming to solve a specific instance of a VRP, based on a problem given by
+    a furniture company. In addition, we will also analyse the performance of three different LP tools: Gurobi, or-tools and
+    Optaplanner. Our goal is to be able to find an optimal solution to the problem and analyse the strengths and weaknesses
+    of the chosen tools. First, we create LP formulations: the capacitated vehicle routing problem (CVRP) and the capacitated
+     vehicle routing problem with time windows (CVRPTW), based on the given problem. Then, we carry out performance
+    analysis on the LP tools on the benchmark and test datasets. Finally, we choose a tool based
+    on the performance analysis and find the optimal solution to the given problem. Our analysis conclude that Optaplanner is the
+    ideal tool for this problem, even though Gurobi has the better performance overall. The solution for the given VRP instance
+    using Optaplanner uses 8 vehicles and yield eucledian distances of 10.27 and 10.49 for CVRP and CVRPTW model respectively.
+
+   \vspace{1.5cm}
+   \textbf{keywords} : Linear Programming, Vehicle Routing Problem, Performance Analysis, Gurobi, Optaplanner, or-tools
 
 \end{abstract2}
 
@@ -94,12 +103,23 @@ distributed provided the source is explicitly acknowledged.
 
 \include{report/chapters/chapter6}
 
-\chapter{References}
-Insert References here....
+% ********************************** Bibliography ******************************
 
-\appendix
-\chapter{First Appendix}
+\begin{spacing}{0.9}
 
+\bibliographystyle{ieeetr}
+
+\bibliography{report/chapters/references}
+
+\end{spacing}
+
+% ********************************** Appendices ********************************
+
+\begin{appendices} % Using appendices environment for more functunality
+
+\include{report/chapters/appendixA}
+
+\end{appendices}
 
 \end{document}
 

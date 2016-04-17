@@ -1,0 +1,131 @@
+\begin{thebibliography}{10}
+
+\bibitem{zweigmedia}
+S.~Waner, ``Finite mathematics utility: linear programming grapher,'' 2009.
+\newblock [Online].
+
+\bibitem{seas:SM}
+P.~R. Simha, ``The traveling salesman problem (tsp).''
+\newblock [Online].
+
+\bibitem{Wiki:SPM}
+Wikipedia, ``Simplex algorithm --- wikipedia{,} the free encyclopedia,'' 2016.
+\newblock [Online].
+
+\bibitem{Sottinen2009}
+T.~Sottinen, {\em Operations Research with GNU Linear Programming Kit}.
+\newblock 2009.
+
+\bibitem{LPVanderbei}
+R.~J. Vanderbei, {\em Linear Programming: Foundations and Extensions}.
+\newblock CRC Press, 2001.
+
+\bibitem{neo:vrp}
+NEO, ``Vehicle routing problem,'' 2016.
+\newblock [Online].
+
+\bibitem{APMBradley}
+S.~Bradley, A.~Hax, and T.~Magnanti, {\em Applied Mathematical Programming}.
+\newblock Addison-Wesley Publishing Company, 1977.
+
+\bibitem{wiki:SA}
+Wikipedia, ``Simplex algorithm --- wikipedia{,} the free encyclopedia,'' 2016.
+\newblock [Online].
+
+\bibitem{wiki:OR}
+Wikipedia, ``Operations research --- wikipedia{,} the free encyclopedia,''
+  2016.
+\newblock [Online].
+
+\bibitem{Dantzig1959}
+G.~B. Dantzig and J.~H. Ramser, ``The truck dispatching problem,'' {\em
+  Management Science}, vol.~1, no.~6, pp.~80--91, 1959.
+
+\bibitem{Meindl2012}
+B.~Meind and M.~Templ, ``Analysis of commercial and free and open source
+  solvers for linear optimization problems,'' 2012.
+
+\bibitem{gurobi:solvers}
+Gurobi, ``Open source linear and mixed-integer programming software and
+  solvers,'' 2016.
+\newblock [Online].
+
+\bibitem{Hakan2012}
+H.~Kjellerstrand, ``Comparison of cp systems,'' in {\em 11th SweConsNet
+  workshop, Orebro, Sweden on May 14th 2012}, (Sweden), 2012.
+
+\bibitem{Augerat1998}
+P.~Augerat, J.~Belenguer, E.~Benavent, A.~Corberan, D.~Naddef, and G.~Rinaldi,
+  ``Computational results with a branch-and-cut code for the capacitated
+  vehicle routing problem,'' 1998.
+
+\bibitem{LPChvatal}
+V.~Chvatal, {\em Linear Programming}.
+\newblock W.H Freemand and Company, 1980.
+
+\bibitem{ILPCoursera}
+``Linear and integer programming.''
+\newblock [online] \url{https://www.coursera.org/course/linearprogramming}.
+
+\bibitem{Dastghaibifard2008}
+G.~Dastghaibifard, E.~Ansari, S.~Sheykhalishahi, A.~Bavandpouri, and E.~Ashoor,
+  ``A parallel branch and bound algorithm for vehicle routing problem,'' in
+  {\em Proceedings of the International MultiConference of Engineers and
+  Computer Scientists 2008 Vol II IMECS 2008, 19-21 March, 2008, Hong Kong},
+  (Hong Kong), International MultiConference of Engineers and Computer
+  Scientists, 2008.
+
+\bibitem{wiki:cp}
+Wikipedia, ``Constraint programming --- wikipedia{,} the free encyclopedia,''
+  2016.
+\newblock [Online].
+
+\bibitem{Bockmayr2003}
+A.~Bockmayr and J.~N. Hooker, ``Constraint programming,'' 2003.
+
+\bibitem{wilson1996}
+R.~Wilson, {\em Introduction to Graph Theory}.
+\newblock 1996.
+
+\bibitem{Daneshzand2011}
+F.~Daneshzand, ``The vehicle-routing problem,'' {\em Logistics Operations and
+  Management}, 2011.
+
+\bibitem{Desrochers1988}
+M.~Desrochers, J.~Lenstra, M.~Savelsbergh, and F.~Soumis, ``Vehicle routing
+  with time windows: Optimization and approximation,'' {\em Vehicle Routing:
+  Methods and Studies}, 1988.
+
+\bibitem{Miller1960}
+R.~Z. C.E.~Miller, A.W.~Tucker, ``Integer programming formulation of traveling
+  salesman problems,'' 1960.
+
+\bibitem{Lawler1985}
+E.~Lawler, J.~K. Lenstra, A.~H. G.~R. Kan, and D.~B. Shmoys, {\em The Traveling
+  Salesman Problem: A Guided Tour of Combinatorial Optimization}.
+\newblock Chichester, UK: Wiley, 1985.
+
+\bibitem{Pataki2003}
+G.~Pataki, ``Teaching integer programming formulations using the traveling
+  salesman problem,'' vol.~45, no.~1, pp.~116--123, 2003.
+
+\bibitem{Pataki2000}
+G.~Pataki, ``The bad and the good-and-ugly: formulations for the traveling
+  salesman problem,'' 2000.
+
+\bibitem{neo:exact}
+NEO, ``Solution methods for vrp,'' 2016.
+\newblock [Online].
+
+\bibitem{Laporte1999}
+G.~Laporte, M.~Gendreau, J.-Y. Potvin, and F.~Semet, ``Classical and modern
+  heuristics for the vehicle routing problem,'' 1999.
+
+\bibitem{gurobi:mip}
+Gurobi, ``Mixed-integer programming (mip) - a primer on the basics,'' 2016.
+\newblock [Online].
+
+\bibitem{Optaplanner}
+Optaplanner, ``Optaplanner user guide,'' 2016.
+
+\end{thebibliography}
