@@ -10,55 +10,54 @@ A level-1 auxiliary file: report/chapters/chapter6.aux
 The style file: ieeetr.bst
 A level-1 auxiliary file: report/chapters/appendixA.aux
 Database file #1: report/chapters/references.bib
-Warning--I didn't find a database entry for "here"
 Warning--empty publisher in Sottinen2009
-Warning--empty journal in Meindl2012
 Warning--empty journal in Augerat1998
+Warning--empty journal in Meindl2012
 Warning--empty journal in Bockmayr2003
 Warning--empty publisher in wilson1996
+Warning--empty journal in Laporte1999
 Warning--empty journal in Miller1960
 Warning--empty journal in Pataki2003
 Warning--empty journal in Pataki2000
-Warning--empty journal in Laporte1999
-You've used 30 entries,
+You've used 34 entries,
             1876 wiz_defined-function locations,
-            639 strings with 7401 characters,
-and the built_in function-call counts, 4723 in all, are:
-= -- 412
-> -- 195
+            677 strings with 8811 characters,
+and the built_in function-call counts, 5606 in all, are:
+= -- 504
+> -- 215
 < -- 0
-+ -- 82
-- -- 52
-* -- 249
-:= -- 711
-add.period$ -- 45
-call.type$ -- 30
-change.case$ -- 24
++ -- 91
+- -- 57
+* -- 299
+:= -- 832
+add.period$ -- 50
+call.type$ -- 34
+change.case$ -- 28
 chr.to.int$ -- 0
-cite$ -- 39
-duplicate$ -- 232
-empty$ -- 576
-format.name$ -- 52
-if$ -- 1160
+cite$ -- 43
+duplicate$ -- 279
+empty$ -- 671
+format.name$ -- 57
+if$ -- 1386
 int.to.chr$ -- 0
-int.to.str$ -- 30
-missing$ -- 24
-newline$ -- 110
-num.names$ -- 29
-pop$ -- 186
+int.to.str$ -- 34
+missing$ -- 27
+newline$ -- 123
+num.names$ -- 33
+pop$ -- 200
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 82
+skip$ -- 115
 stack$ -- 0
-substring$ -- 48
-swap$ -- 25
+substring$ -- 104
+swap$ -- 44
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 9
-while$ -- 33
-width$ -- 32
-write$ -- 255
-(There were 10 warnings)
+while$ -- 41
+width$ -- 36
+write$ -- 293
+(There were 9 warnings)

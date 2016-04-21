@@ -1,52 +1,72 @@
 % chapter 4
 \chapter{Implementation}
-In this chapter, We will discuss the implementation
-of the two LP formulations from the previous chapter using the chosen tools: Gurobi, or-tools and Optaplanner. We will
-also discuss the datasets that are used in the model and background information on hardware that the model is running on.
+In this chapter, we will discuss the implementation
+of the two LP formulations from the previous chapter using the chosen tools.
+This project is hosted on a github repository that can be accessed on \url{https://github.com/mombi93/or-project}.
 
 \section{Hardware and LP Tools Specification}
 The tools are run on the same hardware. The hardware is a macbook pro 2014 with is 2.8GHz dual-core Intel i5 processor. It has
-8GB 1600 MHz DDR3 memory and is running OSX version 10.9.5. We are using Gurobi version 6.5.O, binary distribution of or-tools version 1.0.0
-and Optaplanner version 6.3.0 in this project.
+8GB 1600 MHz DDR3 memory and is running OSX version 10.9.5. We are using Gurobi version 6.5.0, binary distribution of or-tools version 1.0.0
+and Optaplanner version 6.3.0 in this project. We will be using Python version 2.7.5\footnote{https://www.python.org/}
+ to implement the models and to parse the datasets throughout this project.
 
 \section{Datasets}
-We have five benchmark datasets, two test datasets and one problem dataset for this project.
-The benchmark datasets are used to analyse the performance of the tools on typical instances of CVRP. It is based on a study carried out
-by Augerat et al \cite{Augerat1998} to determine the best solutions a set of CVRP instances. Test datasets are used to
-analyse the performance of the tools on a specific instance of VRP that is similar to the problem, but with much lower load.
-Finally, the problem instance is the dataset based on the problem defined in the previous chapter. The test and problem datasets
+We have three types of datasets: benchmark, test and problem datasets. There are five benchmark datasets, one test dataset and two problem dataset used in this project.
+
+The benchmark dataset is taken from a study carried out
+by Augerat \cite{Augerat1998} to determine the outcome of the algorithm that they have developed to solve VRP instances.
+The benchmark datasets define a single depot CVRP instance where the customers are randomly dispersed over a \lbrack0,100\rbrack \hspace{0.025cm} by \lbrack0,100\rbrack \hspace{0.025cm} grid.
+Each customer has a random demand that is lower than the capacity of the vehicles, all of which are homogeneous and have a capacity of 100.
+The datasets have known best solution, which will be used to analyse the performance of our chosen LP tools.
+
+The test dataset T-VRP-9 is used to test if an LP model can solve a VRP instance correctly. It consists of a single depot CVRP
+instance with 8 customers that are spread across \lbrack-5,5\rbrack \hspace{0.025cm} by \lbrack-5,5\rbrack \hspace{0.025cm} grid.
+This dataset has a known solution that was computed manually. Like the benchmark
+datasets, the test datasets comes with pre-defined parameters.
+
+The problem dataset P-VRP-227 is the dataset of the problem defined in chapter 3. The other problem dataset, P-VRP-60, is a subset of the problem dataset
+that is used to check the performance of the LP models on the same CVRP instance as the one in the stated problem, but with smaller load.
+Unlike the test dataset, the parameters of the problem datasets have to be estimated in order to produce the best optimal solution.
+
+The test and problem datasets
 share the same schema: Node number, Latitude and Longitude. Unlike the other two datasets, the original benchmark datasets came in
 XML format and had to be parsed into a matrix format to fit into the LP models. The parsed benchmark dataset has the following schema:
-Node number, Latitude, Longitude and Demand. The complete description of the datasets are available in the appendices section.
+Node number, Latitude, Longitude and Demand. The datasets are available in the github repository.
 
 \section{Model Parameters}
-For the CVRP model, we need a few parameters to fit into the model. A model is an LP formulation that is implemented in
-in with LP tool in a computer. Like,  Parameters are values like number of vehicles or number of routes for an instance of the model.
-Here are some of the parameters that are needed for the CVRP model:
+Below are the parameters that are needed for the CVRP model:
 \begin{itemize}
-\item Number of vehicles. As per the model defined in this will dictate how many route will be generated.
-\item Maximum number of services per route.
-\item Number of customers and their respective location
-\item Customers' locations
-\item Customers' demands. In this model, they are all set to 1.
+\item Number of vehicles - This parameter is specified in the datasets, except on models with estimated parameters.
+\item Capacity of vehicle - This parameter is specified in the datasets, except on models with estimated parameters.
+\item Number of customers - This parameter is specified in the datasets.
+\item Customers' locations - This parameter is specified in the datasets.
+\item Customers' demands - This parameter is specified in the benchmark datasets. However, all of customers' demands
+for the test and problem datasets are set to one, as defined in the problem definition.
 \end{itemize}
 
-For the CVRPTW model, we will need additional variables on to take into account the time windows. They are as follows:
+For the CVRPTW model, we will need additional parameters on to take into account the time windows. They are as follows:
 \begin{itemize}
-\item Earliest times for customer to receive service.
-\item Latest times for customer to receive service.
-\item Service time at each customer. All service time is set to 15 minutes.
+\item Earliest times for customer to receive service - This parameter is set to 09:00 hours for all customers, as defined in the problem definition.
+\item Latest times for customer to receive service - This parameter is set to 17:00 hours for all customers, as defined in the problem definition.
+\item Service time at each customer - This parameter is set to 15 minutes, as defined in the problem definition.
 \end{itemize}
 
-There are some variables that are generated in the model based on the parameters. They are the complete graph
-(The nodes consist of the customers and the depot), Objective value (distance), elapsed time since the start of journey,
-routes for each journey for the vehicles.
 
 \section{Model Implementations}
-It might be easier to think a model like
-a class in object oriented programming.
-We have implemented CVRP model using the available datasets with the chosen tools. The CVRPTW are modelled only using
-VRP-227 data. The process of building a model is shown in figure 4.1.
+To implement an LP model, we start by selecting the formulation that we want to build. Then we create the model by using
+the interface provided by the tool, the data and the appropriate parameters. We ensure that the model follows the objective function
+ and the constraints that are defined by the formulation selected. Once the model is built, we run it
+using the chosen tool and analyse the result. If the model runs into an error or does not give
+a satisfactory solution, we update the model and analyse it again. Otherwise, we record the solution.
+
+To calculate the distance between two nodes using the
+distance formula and convert them into metres using the haversine funtion. Haversine function
+is a function to computes the great circle distance on a sphere given two pairs of coordinate locations.
+The nodes are numbered using integers starting with depot, which is marked with the integer one.
+
+The workflow to build an LP model is shown in figure 4.1.
+
+\vspace{0.5cm}
 \begin{figure}[!ht]
     \tikzstyle{decision} = [diamond, draw, fill=blue!10,
         text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
@@ -80,41 +100,53 @@ VRP-227 data. The process of building a model is shown in figure 4.1.
     \caption{A flowchart of model implementation using LP tools}
 \end{figure}
 
-We start off by selecting the model and the model that we want to build. Then we create the model by using
-the interface provided by the tool, the data and the appropriate parameters. Once the model is built, we run it
-using the chosen tool and analyse the result. If it does not terminate given the time limit or does not give
-a satisfactory solution, we update the model and analyse it again. Otherwise, we record the solution.
-Checking accuracy of solution is only possible with instances with known solution, which in this case
-is only valid for models with VRP-9 as their dataset. We calculate the distance between two nodes using the
-distance formula and convert them into metres using the haversine funtion. Haversine function is ..insert explanation
-here.. Nodes are represented by integers starting with 1, which is also the depot. We need to test the model if they are
-correct, just like in software engineering, where one would test a program by running a unit or regression test.
-
-We have implemented the VRP models with Gurobi using its python interface. Its model implementation consist of two things:
-a python script what holds the optimisation model and the data set. It uses the generalised subtour elimination constraints
+We have implemented the VRP models with Gurobi using its python interface and one additional graph library networkx
+\footnote{See url:\url{https://networkx.github.io/}}
+to conveniently work with graph. It uses the generalised subtour elimination constraints
 to remove subtours from the optimal solution, which are added to the constraint store as cut is applied to the graph.
-The approach to optimise the model is to start with a complete graph and recursively apply a cut until all the
-components are connected. The component in this case is the tours of the vehicles.
-Finding the routes for the vehicle is done by identifying the cycles in the list of edges in the optimal tours. It also
-uses one additional graph library networkx to conveniently work with graph.
+The approach to optimise the model is adopted from an implementation by Pedroso \cite{Pedroso2013}, whereby
+a cut is recursively applied onto the graph until no more cut may be added,
+in which all the graph components are connected. Within the solver, Gurobi uses branch and bound algorithm
+to solve the VRP instance.
+Finding the routes for the vehicle is done by identifying the cycles in the edges of the optimal routes.
+The implementation of this model is shown in the script cvrp-gurobi.py as shown in the appendix sections.
 
-Implementating the mathematical formulation using or-tools is rather similar to Gurobi's. However, the implementation
-is easier as or-tools has already build API for solving vehicle routing problems and it uses no additional libraries.
-It also comes with routing heuristics such as sweep algorithm, tabu search etc etc, which produce different results as
-we shall observe. The optimal routes are build by using the routing API and a 2d array. Each row contains the nodes,
-of a particular tour. The downside to this is that we have no full control of the implementation. Although we may
-also modify the or-tools solver, but this is not advisable, as per the contributor's instruction, unless the user knows
-what he/she is doing.
+Implementing the LP formulations using or-tools is rather similar to Gurobi's. However, the implementation uses no
+additional library and is easier as or-tools has a built-in routing APIs that implement most of the constraint satisfaction
+procedures, such as the SEC and demand constraints. Within the solver, or-tools uses cheapest path heuristic
+to solve the VRP instance.
+The optimal routes are build by using the routing API and a 2D array. The downside to this is that we have no full control of the implementation. We may
+modify the or-tools solver if we want to, but this is not advisable.
+The implementation of this model is shown in cvrp-or-tools.py script that is available in the appendix sections.
 
-Optaplanner accepts only XML format input. We define the model in the xml format and let Optaplanner implement the
-optimisation procedure. We built the input file that reads data from the dataset and generate the XML input given the
-parameters. It comes with a GUI which shows real time optimisation. Like or-tools, modifying the algorithms
-for solving LP problems requires a hack at the solver. The results are generated from the GUI and in the form
+Optaplanner accepts only XML input format. We define the model in the XML format and Optaplanner will
+ implement the optimisation procedure by itself.
+We built the python script, shown in xml-gen.py in the appendix section, that reads data from the dataset and generate the XML input given the
+parameters.
+Unlike the two tools above, it comes with a
+ GUI that allows user to interact better with the its API and
+ shows real time optimisation. Within the solver, Optaplanner various constructive heuristics \cite{Optaplanner}
+to solve the VRP instance. Like or-tools, modifying the algorithms
+for solving LP problems requires hacking the solver. The results are generated from the GUI and in the form
 of an XML file. The exact routes visible from the visualisation, but it is not labelled. The routes can be extracted using
-a python script.
+a python script shown in rt-dist-calc.py that is available in the appendix sections. The generated XML files will not be included in this report due to its sheer size. However, they
+are available in the repository.
 
-We use the chosen tools to run the benchmark datasets. Based on the results and other considerations, we will pick one
-tool to solve the given problem.
+At this point, we have covered the first three of the seven steps of the methodology used for this project and we are
+ready to tackle the core issues of the stated problem. The next step is to test if the implemented models have been modelled
+correctly by runninng them with the test dataset T-VRP-9. This dataset defines a small instance of CVRP model, so that we
+can quickly check if the model is correct. All of the models must produce a solution that is roughly
+similar to the known solution before we run the models on the benchmark datasets. Once all of the models have passed the
+testing phase, we run the models with the benchmark datasets and test dataset P-VRP-60 to analyse their performance.
+Feature analysis is done while implementing the models. Based on the performance analysis, we select the best model
+to solve VRP problem given by the client company.
+
 
 \section{Review}
-Review this chapter... balh dih blah lorem ipsum dolor amet
+In this chapter, we have covered the implementation of the LP models with the various datasets using the chosen tools.
+The models that were implemented with Gurobi and or-tools are made using their Python interface. Gurobi optimise the model by using by continuously
+ applying cut to the graph until all the graph components are connected.
+ LP models created by or-tools were done using the built-in API. To build a model using Optaplanner, which only accepts XML input format, we use a python script to generate XML file that
+  defines the problem. Optaplanner will implement the procedure internally.
+
+In the next chapter, we shall show the results and discussions of of the analysis made in this chapter.

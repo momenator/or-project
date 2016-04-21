@@ -5,6 +5,7 @@ import os
 from gurobipy import *
 
 class CVRPGurobi:
+
 	"""
 		A CVRP model with one depot
 		Based on Implementation by Joao Pedro PEDROSO and Mikio KUBO
@@ -128,10 +129,8 @@ class CVRPGurobi:
 		self._V = range(1, self._nodes + 1)
 		for i in self._V:
 			# sets the demand for all depots to be 1
-			if i == 1:
-				self._q[i] = 0
-			else:
-				self._q[i] = 1
+
+			self._q[i] = inDict[i]['dem']
 			for j in self._V:
 				# skips if j < i
 				if j != i:
@@ -154,7 +153,7 @@ def parse_coordinates_matrix(infile):
 	for line in infile:
 		line.replace("\n","")
 		lineArg = line.split(" ")
-		coordinatesDict[int(lineArg[0])] = {'x':float(lineArg[1]) ,'y':float(lineArg[2]) }
+		coordinatesDict[int(lineArg[0])] = {'x':float(lineArg[1]) ,'y':float(lineArg[2]), 'dem': int(float(lineArg[3].replace("\n","")))}
 	return coordinatesDict
 
 """
@@ -177,7 +176,7 @@ def parse_travel_matrix(infile):
 def main(argv):
 	script, datafile = argv
 	inputData = open(datafile)
-	myModel = CVRPGurobi(60, 5, 15)
+	myModel = CVRPGurobi(44, 6, 100)
 	dDict = parse_coordinates_matrix(inputData)
 	myModel.make_cost_matrix(dDict)
 	myModel.add_path_variables()

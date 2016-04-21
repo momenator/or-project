@@ -1,15 +1,16 @@
 % chapter 6
 \chapter{Conclusions and Future Work}
-In here I shall conclude a few things: we've started off with a primer on linear programming and discussed its state
- of the art. Obtained the optimal routes that yields the minimum distance and the number of vehicles to use. Made
- recommendations based on those findings to the company. Also compare and contrast the tools used for optimisation. Also
- included anything that went wrong during the project\footnote{footnote 1}
+We have successfully conducted an OR study using the methodology stipulated in chapter 1 based on the problem defined chapter 3.
+We have successfully created LP formulations out of modelled those them using
+ the chosen LP tools. Our analysis shows that Gurobi has the best overall performance and whereas or-tools has the worst.
+ Our analysis concludes that Optaplanner performs better in solving the given VRP problem. We have used optaplanner to find
+ the optimal solution to the problem and it yields 10.27 and 10.49 eucledian distances for CVRP and CVRPTW model
+ respectively. The real distances in km are 798.23 and 828.23 for CVRP and CVRPTW model respectively.  This analysis
+ has one downside which is that it does not accurately model road distances, which may reduce the accuracy by as much
+ as x percent.
 
-\textbf{Future Work}
-More accurate model with road distance and taking into account traffic conditions like traffic jam etc. Model
- different variants of the problem, such as Multi depot cvrp etc. Dive into the source  code / manual of
- the tools to further understand how it works and use them to get better results.\footnote{footnote 2}
-
- Experiment with different solvers
-
- Work out on their optimality...
+There are clearly more room for improvements in some aspects of this project, which would be ideal for future work.
+One would be to incorporate road distances to ensure that the model simulate real life scenario as accurately as
+possible. We could also replicate the same study under different environment and limitations, such as using high performance
+computer or using a longer time limit. Instead of focusing on solely solving VRP, we can test the performance of the solver
+on other benchmark datasets.

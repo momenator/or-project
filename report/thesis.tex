@@ -8,6 +8,40 @@
 \usetikzlibrary{shapes,arrows}
 \usepackage[parfill]{parskip}
 \urlstyle{same}
+\linespread{1.5}
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
+\usepackage{listings}
+\usepackage{courier}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\tiny,                 % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Python,                 % the language of the code
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
 
 
 \usepackage{graphicx}
@@ -29,7 +63,7 @@
 \title{\textit{Linear Programming to Solve\\Vehicle Routing Problem}}
 
 %% Subtitle (Optional)
-\subtitle{\textit{A Project on Tour Optimisation and Analysis of Linear Programming Tools}}
+\subtitle{\textit{A Project on Route Optimisation and Analysis of Linear Programming Tools}}
 
 %% The full name of the author
 \author{Muhammad Rafdi}
@@ -61,21 +95,24 @@
 
 \begin{abstract2}
 
-    Linear programming is a method to find the optimal solution to combinatorial optimisation problems. One of those
-    problems, is the vehicle routing problem (VRP). VRP has been studied decades due to its difficulty in finding the optimal solution
-     and wide range og applications in the real world.
-    In this project, we will be using linear programming to solve a specific instance of a VRP, based on a problem given by
-    a furniture company. In addition, we will also analyse the performance of three different LP tools: Gurobi, or-tools and
+    Linear programming (LP) is a method to find the optimal solution to combinatorial optimisation problems.
+    In this project, we will be using linear programming to solve a specific instance of a vehicle routing problem (VRP) and
+     analyse the performance of three different LP tools: Gurobi, or-tools and
     Optaplanner. Our goal is to be able to find an optimal solution to the problem and analyse the strengths and weaknesses
-    of the chosen tools. First, we create LP formulations: the capacitated vehicle routing problem (CVRP) and the capacitated
-     vehicle routing problem with time windows (CVRPTW), based on the given problem. Then, we carry out performance
-    analysis on the LP tools on the benchmark and test datasets. Finally, we choose a tool based
-    on the performance analysis and find the optimal solution to the given problem. Our analysis conclude that Optaplanner is the
-    ideal tool for this problem, even though Gurobi has the better performance overall. The solution for the given VRP instance
-    using Optaplanner uses 8 vehicles and yield eucledian distances of 10.27 and 10.49 for CVRP and CVRPTW model respectively.
+    of the chosen tools.
+
+    First, we create LP formulations: the capacitated vehicle routing problem (CVRP) and the capacitated
+     vehicle routing problem with time windows (CVRPTW). Then, we carry out performance
+    analysis of the LP tools using the benchmark and test datasets. Finally, we choose a tool based
+    on the performance analysis and find the optimal solution to the two LP formulations.
+
+    Our analysis conclude that Optaplanner is the ideal tool for this problem, even though Gurobi has the better
+    performance overall. Or-tools performs poorly or take too long to compute the solution to the problem. Using
+    Optaplanner, we have obtained an optimal solution that uses 8 vehicles with capacity of 29 and yield eucledian
+    distances of 10.27 and 10.49 for CVRP and CVRPTW model respectively.
 
    \vspace{1.5cm}
-   \textbf{keywords} : Linear Programming, Vehicle Routing Problem, Performance Analysis, Gurobi, Optaplanner, or-tools
+   \textbf{Keywords} : Linear Programming, Vehicle Routing Problem, Performance Analysis, Gurobi, Optaplanner, or-tools
 
 \end{abstract2}
 

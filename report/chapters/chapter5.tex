@@ -1,44 +1,144 @@
 % chapter 5
-\chapter{Results and Discussions}
-In this chapter we will discuss the results from the analysis of benchmark datasets and the problem dataset, followed
-by the discussions on the results. Finally, we give recommendation to the company based on the requirements stipulated
-in chapter 3.
+\chapter{Results Evaluation}
+In this chapter we will discuss the results taken from the performance and feature analysis as well as problem analysis
+defined in step 4 to 6 of the project methodology.
 
-\section{Results}
-Table 5.1 shows the result of the analysis of various benchmark datasets using Gurobi, or-tools and optaplanner. There is
-a time limit imposed on each analysis. For gurobi and optaplanner, the model runs for approximately\footnote{need to account for the reaction
-time of human} the full duration of time limit and whatever solution is retrieved at the end of it is recorded. For optaplanner, the tabulated
-time is taken the moment its tabulated solution does not change. All solution stated is in terms of the total euclidian distance
-of all routes combined.
+\section{Test Results}
+The table below shows the results of models running on the test dataset.
+
 \begin{table}[!ht]
-\caption{results}
-\label{table:results}
-\begin{center}
-\begin{tabular}{|l|l|l|l|l|l|l|}
+\centering
+\begin{tabular}{|l|l|l|l|}
 \hline
-\multirow{2}{*}{Model /\ Solver}                                                         & \multicolumn{2}{l|}{Gurobi}                              & \multicolumn{2}{l|}{or-tools}                      & \multicolumn{2}{l|}{Optaplanner}                       \\ \cline{2-7}
-                                                                                         & Time                           & Solution                & Time                     & Solution                & Time                     & Solution                \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}A-n32-k5\\ Best Solution: 784\end{tabular}}  & \multirow{2}{*}{leq 1s}        & \multirow{2}{*}{763.9}  & \multirow{2}{*}{< 1s} & \multirow{2}{*}{870.9}  & \multirow{2}{*}{11s}  & \multirow{2}{*}{787.1}  \\
-                                                                                         &                                &                         &                          &                         &                              &                         \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}A-n44-k6\\ Best Solution: 937\end{tabular}}   & \multirow{2}{*}{5 mins} & \multirow{2}{*}{849}    & \multirow{2}{*}{< 1s} & \multirow{2}{*}{1013.8} & \multirow{2}{*}{37s}  & \multirow{2}{*}{938.8}  \\
-                                                                                         &                                &                         &                          &                         &                              &                         \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}A-n53-k7\\ Best Solution: 1010\end{tabular}}  & \multirow{2}{*}{5 mins} & \multirow{2}{*}{925.9}  & \multirow{2}{*}{< 1s} & \multirow{2}{*}{1119.2} & \multirow{2}{*}{1:06} & \multirow{2}{*}{1057.3} \\
-                                                                                         &                                &                         &                          &                         &                              &                         \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}A-n65-k9\\ Best Solution: 1174\end{tabular}}  & \multirow{2}{*}{5 mins} & \multirow{2}{*}{1027}   & \multirow{2}{*}{< 1s} & \multirow{2}{*}{1284}   & \multirow{2}{*}{1:24} & \multirow{2}{*}{1187}   \\
-                                                                                         &                                &                         &                          &                         &                              &                         \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}A-n80-k10\\ Best Solution: 1763\end{tabular}} & \multirow{2}{*}{5 mins} & \multirow{2}{*}{1484.1} & \multirow{2}{*}{< 1s} & \multirow{2}{*}{1948.2} & \multirow{2}{*}{2:00} & \multirow{2}{*}{1797.6} \\
-                                                                                         &                                &                         &                          &                         &                              &                         \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}T-VRP-9\\ Best Solution: N.A\end{tabular}}    & \multirow{2}{*}{5 mins} & \multirow{2}{*}{34.6}   & \multirow{2}{*}{< 1s} & \multirow{2}{*}{34.7}   & \multirow{2}{*}{leq 1s}      & \multirow{2}{*}{31.5}   \\
-                                                                                         &                                &                         &                          &                         &                              &                         \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}P-VRP-60\\ Best Solution: N.A\end{tabular}}   & \multirow{2}{*}{5 mins} & \multirow{2}{*}{3.1}    & \multirow{2}{*}{< 1s} & \multirow{2}{*}{10.5}   & \multirow{2}{*}{1:04} & \multirow{2}{*}{2.9}    \\
-                                                                                         &                                &                         &                          &                         &                              &                         \\ \hline
+\multicolumn{4}{|c|}{CVRP Models running T-VRP-9 (Best solution: 31.5)} \\ \hline
+              & Gurobi         & or-tools       & Optaplanner    \\ \hline
+No of Vehicles & 2               & 2              & 2             \\ \hline
+Vehicle Capacity & 4               & 4              & 4             \\ \hline
+Time          & \textless 1 s  & \textless 1 s  & \textless 1 s  \\ \hline
+Distance      & 31.5           & 34.2           & 31.5           \\ \hline
+\% Optimality & 100            & 92.1           & 100          \\ \hline
 \end{tabular}
-\end{center}
+\caption{Results from CVRP models running T-VRP-9 dataset}
+\label{test-table}
 \end{table}
 
-Based on the results above other considerations, we have decided to use oplaplanner to analyse the VRP problem.
-We have analysed the CVRP and CVRPTW models based on the formulation in chapter 3 and tabulated the results in
-table 5.2 below:
+As seen on the table above, or-tools did not perform as well as the other LP tools. However, its solution is a valid one
+and it is worth checking how it performs under the benchmark datasets. All of the models have met the requirements a, b, c
+stated in the requirements table.
+
+\section{Performance and Feature Analysis of LP Tools}
+The table below shows the results of performance analysis the three models. All of the vehicles in the benchmark dataset
+has the capacity of 100.
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+                                                                                                                              & \multicolumn{6}{c|}{Models}                                                                                                                                      \\ \hline
+\multirow{2}{*}{Datasets}                                                                                                     & \multicolumn{2}{l|}{Gurobi}                       & \multicolumn{2}{l|}{or-tools}                           & \multicolumn{2}{l|}{Optaplanner}                   \\ \cline{2-7}
+                                                                                                                              & Time                    & Solution                & Time                          & Solution                & Time                     & Solution                \\ \hline
+\multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}Name: A-n32-k5\\ Best Solution: 784\\ No of Vehicles: 5\\ Customers: 31\end{tabular}}    & \multirow{4}{*}{5 mins} & \multirow{4}{*}{N.A}  & \multirow{4}{*}{\textless 1s} & \multirow{4}{*}{870.9}  & \multirow{4}{*}{11s}     & \multirow{4}{*}{787.1}  \\
+                                                                                                                              &                         &                         &                               &                         &                          &                         \\
+                                                                                                                              &                         &                         &                               &                         &                          &                         \\
+                                                                                                                              &                         &                         &                               &                         &                          &                         \\ \hline
+\multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}Name: A-n44-k6\\ Best Solution: 937\\ No of Vehicles: 6\\ Customers: 43\end{tabular}}    & \multirow{4}{*}{5 mins} & \multirow{4}{*}{N.A}    & \multirow{4}{*}{\textless 1s} & \multirow{4}{*}{1013.8} & \multirow{4}{*}{37s}     & \multirow{4}{*}{938.8}  \\
+                                                                                                                              &                         &                         &                               &                         &                          &                         \\
+                                                                                                                              &                         &                         &                               &                         &                          &                         \\
+                                                                                                                              &                         &                         &                               &                         &                          &                         \\ \hline
+\multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}Name: A-n53-k7\\ Best Solution: 1010 \\ No of Vehicles: 7\\ Customers: 52\end{tabular}}  & \multirow{4}{*}{5 mins} & \multirow{4}{*}{N.A}  & \multirow{4}{*}{\textless 1s} & \multirow{4}{*}{1119.2} & \multirow{4}{*}{1 m 6s}  & \multirow{4}{*}{1057.3} \\
+                                                                                                                              &                         &                         &                               &                         &                          &                         \\
+                                                                                                                              &                         &                         &                               &                         &                          &                         \\
+                                                                                                                              &                         &                         &                               &                         &                          &                         \\ \hline
+\multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}Name: A-n65-k9\\ Best Solution: 1174\\ No of Vehicles: 9\\ Customers: 64\end{tabular}}   & \multirow{4}{*}{5 mins} & \multirow{4}{*}{N.A}   & \multirow{4}{*}{\textless 1s} & \multirow{4}{*}{1284}   & \multirow{4}{*}{1 m 24s} & \multirow{4}{*}{1187}   \\
+                                                                                                                              &                         &                         &                               &                         &                          &                         \\
+                                                                                                                              &                         &                         &                               &                         &                          &                         \\
+                                                                                                                              &                         &                         &                               &                         &                          &                         \\ \hline
+\multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}Name: A-n80-k10\\ Best Solution: 1763\\ No of Vehicles: 10\\ Customers: 79\end{tabular}} & \multirow{4}{*}{5 mins} & \multirow{4}{*}{N.A} & \multirow{4}{*}{\textless 1s} & \multirow{4}{*}{1948.2} & \multirow{4}{*}{2 m}     & \multirow{4}{*}{1797.6} \\
+                                                                                                                              &                         &                         &                               &                         &                          &                         \\
+                                                                                                                              &                         &                         &                               &                         &                          &                         \\
+                                                                                                                              &                         &                         &                               &                         &                          &                         \\ \hline
+\end{tabular}
+\caption{Performance Analysis Results}
+\label{table:results}
+\end{table}
+
+None of the Gurobi models were able to give the optimal solution within 5 minutes. To roughly gauge the performance of Gurobi model,
+We let its model running the A-n32-k5 dataset to run indefinitely. It stopped after 10 minutes and 30 seconds from the start and produces an optimal solution of
+787.1, similar to the best solution by model implemented in Optaplanner. Based on this, we expect that the runtime of this model to take much longer time
+when using datasets with higher loads with roughly similar solution to Optaplanner.
+
+Despite performing well on the T-VRP-9, the solutions produced by the or-tools model are roughly
+10\% less optimal than the known best solutions. Switching to other routing heuristics would either cause the model to run
+ for indefinitely long time or produce a solution with no significant improvement.
+There are a few heuristics and metaheuristics available, investigating how they perform with one another would be best for
+another project. By using a combination of heuristics and metaheuristics, it is possible that to improve the existing results.
+
+Optaplanner performs rather well on the benchmark dataset, averaging at approximately 0.01\% less optimal than the best
+known solutions. The Optaplanner model runs five minutes, but the optimal solution obtained does not change after
+30 seconds to two minutes after the model has been run.
+
+We also run the three models on the P-VRP-60 dataset to analyse how the models perform on the problem dataset with lower
+load.  The results are tabulated in the table 5.3 and it clearly shows that Optaplanner has the best performance.
+\begin{table}[!ht]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\multicolumn{4}{|c|}{CVRP Models running P-VRP-60} \\ \hline
+              & Gurobi         & or-tools       & Optaplanner    \\ \hline
+No of Vehicles & 5               & 5              & 5            \\ \hline
+Vehicle Capacity & 15               & 15              & 15             \\ \hline
+Time          & 1m 52s  & < 1s  & 1m 4s \\ \hline
+Distance      & 3.1           & 10.5          & 2.9           \\ \hline
+\end{tabular}
+\caption{Results from CVRP models running P-VRP-9 dataset}
+\label{p60-table}
+\end{table}
+
+The disparity of performance may be attributed to the implementation of the LP solver.
+Gurobi uses Branch and bound method to solve MIP based problems \cite{gurobi:mip}, including VRP. Whereas
+ Or-tools and Optaplanner uses heuristics approach to solve VRP and other planning based problems. As we have
+  discussed in chapter 2, the choice of approach to solve the VRP instance will highly impact the time taken to compute it.
+
+During the implementation of the LP models, we did feature analysis of the three LP tools mentioned in this project.
+The results are tabulated in the table 5.4. Please note some of the attributes assigned to these features are subjective.
+We assess activity of the user community through frequency of posts in google groups.
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+                      & Gurobi        & or-tools & Optaplanner \\ \hline
+Ease of Modelling     & Moderate      &   Moderate      &    Easy    \\ \hline
+Documentation         & Good         &  Incomplete   &   Good       \\ \hline
+Examples              & Many        &  Many        &     Many        \\ \hline
+Active Community      & Very Active  &  Active     &  Active        \\ \hline
+Command line option   & Available            &  Available         &  Not available          \\ \hline
+Programming Languages & >10               &    4      &    Java only         \\ \hline
+Open source           &   No            &    Yes      &     Yes        \\ \hline
+Cost                  &  Very high     &     Free     &       Free      \\ \hline
+Performance           &  Good             &   Fair        &    Good         \\ \hline
+Installation          &  Easy            &   Slightly difficult      &     Very easy        \\ \hline
+GUI                   &  Not available             &   Not available        &  Not available            \\ \hline
+Enterprise support     &  Available             &   Not available        &     Available        \\ \hline
+\end{tabular}
+\caption{Feature analysis of LP tools}
+\label{feature-analysis}
+\end{table}
+
+We have decided to use Optaplanner to analyse the problem given by the company. There are a few reasons
+for this choice. Firstly, Optaplanner gives the best performance to solve CVRP instance based on the performance analysis
+and the results of P-VRP-60 dataset.  Secondly, it is very practical and easy to model formulations using
+this tool. Lastly, Gurobi and or-tools were impractical and inefficient to use given the circumstances of our project. It will take many hours
+for Gurobi to solve VRP with 226 customers and or-tools produce very unsatisfactory results, based on its performance on P-VRP-60.
+
+\section{Route Optimisation and Parameter Estimation}
+Using Optaplanner, We have analysed the CVRP and CVRPTW models based on the formulation in chapter 3 and tabulated the results in
+table 5.4. Both models have the following parameters:
+\begin{itemize}
+\item P-VRP-227 dataset
+\item has 8 vehicles, each of which is capable of delivering 29 items.
+\item 226 customers and 1 depot
+\end{itemize}
 \begin{table}[!ht]
 \centering
 \begin{tabular}{|l|l|l|l|}
@@ -47,132 +147,52 @@ Model  & Time Window & Solution & Actual Distance \\ \hline
 CVRP   & No          & 10.27   & 798.57\\ \hline
 CVRPTW & Yes         & 10.49   & 828.95\\ \hline
 \end{tabular}
-\caption{Results of analysis of VRP problem}
+\caption{Optimisation results of VRP problem}
 \label{my-label}
 \end{table}
-Both models have the following parameters:
-\begin{itemize}
-\item P-VRP-227 dataset
-\item Time limit of 5 mins
-\item has 8 vehicles, each of which is capable of delivering 29 items.
-\item 226 customers
-\end{itemize}
 
-For CVRPTW model, the earliest and latest time for delivery for all customers is set to 09:00 and 17:00 respectively. The
-service time is set to 15 minutes.
+For CVRPTW model,the service time is set to 15 minutes and the earliest and latest time for delivery for all customers is set to 09:00 and 17:00 respectively.
+The actual distances are in kilometers and they were computed using the haversine function.
 
-These are the routes of the two models are tabulated in figure 5.3 and 5.4. The numbers represent the node number and
-they are arranged in order of which customers get visited first.
-\begin{table}[!ht]
-\centering
-\caption{Routes}
-\label{my-label}
-\begin{tabular}{|l|l|}
-\hline
-\multicolumn{2}{|l|}{CVRP Model}                                                                      \\ \hline
-Vehicle No         & Order of visit                                                                         \\ \hline
-\multirow{2}{*}{1} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}48, 57, 75, 70, 102, 87, 79, 96, 97, 91, 144, 126, 146, 145,\\ 163, 188, 182, 187, 171, 189, 143, 62, 156, 167, 134, 76, 45, 29\end{tabular}} \\
-                   &                                                                                  \\ \hline
-\multirow{2}{*}{2} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}24, 54, 68, 67, 85, 80, 110, 152, 180, 191, 193, 196, 181, 147,\\ 175, 113, 108, 83, 78, 130, 136, 154, 105, 73, 53, 23, 44, 41, 22\end{tabular}}  \\
-                   &                                                                                  \\ \hline
-\multirow{2}{*}{3} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}25, 40, 127, 107, 141, 199, 202, 209, 192, 213, 217, 222, 201,\\ 210, 208, 204, 206, 214, 207, 195, 205, 112, 92, 88, 104, 93\end{tabular}} \\
-                   &                                                                                  \\ \hline
-\multirow{2}{*}{4} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}32, 47, 59, 21, 26, 43, 31, 114, 98, 178, 172, 176, 161, 165,\\ 185, 216, 225, 218, 226, 227, 224, 220, 223, 215, 184, 103, 74, 63, 37\end{tabular}}  \\
-                   &                                                                                  \\ \hline
-\multirow{2}{*}{5} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}36, 60, 56, 128, 153, 140, 133, 166, 139, 162, 194, 183, 168,\\ 173, 155, 135, 115, 95, 72, 77, 94, 61, 99, 124, 86, 109, 123\end{tabular}}  \\
-                   &                                                                                  \\ \hline
-\multirow{2}{*}{6} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}71, 33, 69, 46, 42, 82, 65, 131, 132, 164, 169, 150, 177, 190,\\ 125, 116, 66, 118, 119, 106, 101, 138, 84, 90, 120, 142, 121, 111, 52\end{tabular}}  \\
-                   &                                                                                  \\ \hline
-\multirow{2}{*}{7} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}17, 20, 30, 19, 15, 13, 14, 35, 34, 38, 39, 28, 64, 58, 49, 51,\\ 55, 16, 18, 12, 50, 9, 10, 11, 7, 8, 2, 4, 5\end{tabular}}  \\
-                   &                                                                                  \\ \hline
-\multirow{2}{*}{8} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}3, 6, 89, 151, 129, 157, 122, 137, 159, 158, 117, 174, 198, 186,\\ 212, 211, 221, 219, 200, 203, 197, 179, 170, 149, 160, 148, 100, 81, 27\end{tabular}}  \\
-                   &                                                                                  \\ \hline
-\end{tabular}
-\end{table}
+These are the routes of the two models are tabulated in figure the appendix section. The numbers represent the node number and
+they are arranged in order of which customers get visited first. The node number may be translated into post code by referring
+to the node to post code table in the appendix section. In addition, the route visualisations are also included in appendix F.
 
-\begin{table}[!ht]
-\centering
-\caption{Routes}
-\label{my-label}
-\begin{tabular}{|l|l|}
-\hline
-\multicolumn{2}{|l|}{CVRPTW Model}                                                                      \\ \hline
-Vehicle No         & Order of visit                                                                           \\ \hline
-\multirow{2}{*}{1} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}3, 151, 157, 85, 129, 122, 137, 159, 117, 158, 174, 136, 108, 95,\\ 113, 198, 179, 197, 203, 212, 211, 221, 219, 200, 89, 8, 7, 2\end{tabular}} \\
-                   &                                                                                  \\ \hline
-\multirow{2}{*}{2} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}24, 40, 41, 27, 81, 148, 110, 78, 72, 83, 80, 77, 115, 149, 186,\\ 191, 181, 196, 193, 152, 133, 61, 140, 94, 124, 99, 54, 44\end{tabular}}  \\
-                   &                                                                                  \\ \hline
-\multirow{2}{*}{3} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}25, 60, 56, 86, 100, 135, 166, 139, 155, 194, 162, 183, 173, 168,\\ 170, 160, 180, 175, 147, 130, 154, 105, 73, 68, 67, 53, 23, 36, 22\end{tabular}} \\
-                   &                                                                                  \\ \hline
-\multirow{2}{*}{4} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}55, 37, 63, 31, 93, 123, 109, 127, 141, 128, 153, 107, 199, 202,\\ 209, 192, 201, 210, 222, 217, 213, 204, 208, 205, 185, 172, 91, 104, 48\end{tabular}}  \\
-                   &                                                                                  \\ \hline
-\multirow{2}{*}{5} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}75, 102, 103, 145, 176, 184, 215, 220, 223, 224, 227, 226, 225,\\ 216, 218, 195, 214, 207, 206, 178, 161, 165, 112, 98, 92, 88, 114, 43, 26\end{tabular}}  \\
-                   &                                                                                  \\ \hline
-\multirow{2}{*}{6} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}52, 111, 118, 119, 106, 101, 142, 121, 120, 90, 84, 190, 177,\\ 116, 125, 164, 169, 150, 134, 132, 131, 82, 65, 76, 46, 69, 70, 57\end{tabular}}  \\
-                   &                                                                                  \\ \hline
-\multirow{2}{*}{7} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}32, 47, 59, 21, 87, 97, 126, 163, 146, 144, 188, 182, 187, 96,\\ 79, 74, 143, 62, 156, 189, 171, 167, 45, 42, 29, 33, 71\end{tabular}}  \\
-                   &                                                                                  \\ \hline
-\multirow{2}{*}{8} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}19, 20, 30, 17, 14, 13, 15, 35, 34, 38, 28, 39, 64, 138, 66, 58,\\ 49, 51, 4, 5, 6, 11, 16, 10, 9, 50, 12, 18\end{tabular}}  \\
-                   &                                                                                  \\ \hline
-\end{tabular}
-\end{table}
+To obtain the best solution, we need to estimate the number of vehicles and their maximum capacity.
+We have estimated them by trial and error. There are 227 nodes in total, so the minimum number of edges to traverse
+ all of the vertices once is 227. We try using different combinations of number of vehicles and vehicle capacity, such that their product
+ is close to 227. We start by using more vehicles and low
+capacity. As we use lesser amount of vehicles and higher capacity, the total distance gets lower. However, using very few vehicles with high capacity may
+yield infeasible solution or yield similar results to when using higher number of vehicles with low capacity.
+We found the optimum value for both the CVRP and CVRPTW models when we use 8 vehicles with 29 capacity.
 
-Visualisation of CVRP and CVRPTW model:
 
-\begin{figure}[!ht]
-  \centering
-    \includegraphics[width=1\textwidth]{227-cvrp.png}
-    \caption{Visualisation of CVRP Model}
-\end{figure}
+\section{Accuracy of Analysis}
+We are using air distance in all of the models that we created. In other words, we assume that the path from location to another to be straight.
+However, this is not  the case with the roads on land. Using the actual distance as opposed to euclidian distance is
+more accurate and would generate significant amount of savings in operational cost on a
+large scale operations.  The eucledian distance is rather arbitrary since we cannot really tell how far is that in the
+real world. So, we use haversine function to get the actual distance in km based on the optimal routes produced.
+Despite the inaccuracy, this is still far better than using manual route creation by human, which is not only very
+inefficient and impractical, but take relatively longer time.
 
-\begin{figure}[!ht]
-  \centering
-    \includegraphics[width=1\textwidth]{227-cvrptw.png}
-    \caption{Visualisation of CVRPTW Model}
-\end{figure}
-
-\section{Discussions}
+\section{Recommendations}
+Based on the analysis above, we make the following recommendations to client company:
 \begin{enumerate}
-\item Performance analysis of LP tools. Overall, Gurobi outperforms or-tools and optaplanner on all the models with
-benchmark datasets. The optimal results obtained are even better than the known solution. We assume that the model is
-correct, given the fact that it performs well on the test instance.
-Or-tools underperforms on all cases using cheapest arc heuristics. Using different heuristics does not
-improve the results and may take too long to terminate. Optaplanner gives a solution that is close to the best known result
- and gives the best performance for P-VRP-60, which indicates that it may be more suitable to use on a given problem.
- here are some pros and cons of using the tools, we only comment on the its application in VRP based problems.
-
-\item Why Optaplanner? There are a few reasons to choose optaplanner. Firstly, it yields the best solution for the instance
-of CVRP based on the given problem. It is easy to create a model and free: these two criteria is important, considering that
-the requests made by the company.
-
-\item talk about parameter estimation. We estimate the parameters such as the number of vehicles and its maximum capacity by trial
-and error. There are 227 nodes, so the minimum number of edges to traverse all the edges once is 227. So, we get the combination of vehicles
-and capacity by multiplying them such that the product is slightly greater than 227. In our analysis, using 8 vehicles and with 29 capacity
-yields the best result.
-
-\item How accurate is the model compared to the real life scenario?
- We are using air distance, which does not accurately present
-the roads in traffic as they are never straight. This may undermine the quality of the solution
- In addition, we need to use the haversine function on the routes to get the distance covered in km. However, this solution
- would definitely be efficient enough to save the company money when utilised, as opposed to using manual route planning.
-
-\item Advantages and Disadvantages of using each tool and suggest which tool to use given user profile.
+\item The optimal solution to the given problem measured in euclidian distances are 10.27 and 10.49 for the CVRP and CVRPTW Model respectively.
+Both models use 8 vehicles with 29 capacity. In kilometers, the optimal solution for CVRP model is 798.57 and 828.95 for the CVRPTW model.
+The routes for both models are tabulated in appendix C.2 and C.3. The figure in appendix C.1 may be used to translate
+node number into customer post code location.
+\item Optaplanner yields the best performance overall to solve given VRP problem. If time is not an issue, Gurobi may
+be used instead. Gurobi would also be more preferrable to use as the client tackles more sophisticated VRP problems. Or-tools produce
+suboptimal solutions to both benchmark and problem datasets. This tool may be good for experimentation and learning purposes.
 \end{enumerate}
 
-\begin{table}[!ht]
-\centering
-\caption{My caption}
-\label{my-label}
-\begin{tabular}{|l|p{0.2\textwidth}|p{0.2\textwidth}|p{0.3\textwidth}|}
-\hline
-Tools       & Advantages & Disadvantages & Comments \\ \hline
-Gurobi      & High performance, good APIs to interface other languages, easy to install, and more control on model implementation.
-            & Costs money when used for business and relatively hard to use
-            & This tool is suitable for companies with sizeable budget on the data analysis department and more experienced OR analysts. \\ \hline
-Or-tools    & good APIs to interface popular languages,free, open source  &  Relatively poor performance and hard to install  & This tool is suitable for hobbysts and experienced programmers who would like to look at examples and optimise their own solver\\ \hline
-Optaplanner &  Good performance, comes with GUI, free, open source, easy to model formulation &     only support Java     & Good tool for learning how to solve planning problems. Can also be used at enterprise level...  \\ \hline
-\end{tabular}
-\end{table}
-
 \section{Review}
-Review this chapter... balh dih blah lorem ipsum dolor amet
+In this chapter we have shown the results of our analysis and made thorough discussion on them. Based on the
+performance analysis, we found that only Optaplanner and Gurobi produces optimal solutions to solving VRP instances. Or-tools
+The optimal solution of the given VRP problem is found to be 10.27 and 10.49 for the CVRP and
+CVRPTW model respectively, measured in eucledian distances. In km, the distances are 798.57 and 829.32 for the CVRP and
+CVRPTW respectively. The routes of both models are tabulated in the tables available in the appendix.  Overall, the
+analysis meets the expectations, however one major downside to this is that results may  not fully represent the real
+world scenario as they do not use real road distance.

@@ -1,55 +1,42 @@
 % chapter 3
-\chapter{Analysis and Requirements}
-Now that we have covered the relevant concepts needed, we shall proceed with
-analysing the given problem, by creating an LP formulations that represent the problem to the highest possible accuracy.
-The formulation section is followed by sections that analyses the approaches to solve the problem and its computational
-complexity. Finally, we identify the requirements for furnish based on the analysis made in the previous sections. The
-requirements are used to measure the success of our analysis.
+\chapter{Requirements and Analysis}
+In this chapter, we will focus on creating the LP formulations and identifying the requirements to solve the given problem.
 
-\section{Problem Statement}
-Furnish ltd\footnote{not a real company} is a leading furniture store with outlets that spread across the UK. In one busy day, the company is scheduled to
-make deliveries to 226 customers across the country. The deliveries are made to the customers' location by delivery vehicles. All vehicles are
+\section{Problem Definition}
+In one busy day, the company is scheduled to make deliveries to 226 customers across the country. The deliveries are made to the customers' location by delivery vehicles. All vehicles are
 expected deliver all of the customers' goods in one visit.  There are 16 of these vehicles and they are based in
 one central location (depot), where the company's goods are stored. The delivery vehicles only operate on
 a time window from 09:00 to 17:00. On each delivery to a customer, it takes an average of 15 minutes for the workers to successfully unload the goods.
 The company wants to find the routes that yield the minimum (optimal) distance and such that all customers are visited only once. They are interested
 in finding the vehicle routes that yield the minimum distance for both with and without the time windows.
-In addition, Furnish wants to find out if it can use less vans to make all deliveries while
-keeping the total distance roughly the same as deliveries with 16 vehicles. The vehicles may serve up to 50 customers in a single tour.
+The company also wants to find out if it can use less vans to make all deliveries while
+keeping the total distance roughly the same (or less) as deliveries with 16 vehicles. The vehicles may serve up to 50 customers in a single tour.
 
 We may make the following assumptions for convenience in modelling the LP formulations:
 \begin{enumerate}
 \item The service time for all deliveries is set to 15 minutes.
-\item All vans are homogeneous and have very large capacity (up to 50 items).
+\item All delivery vehicles are homogeneous and have very large capacity (up to 50 items).
 \item Customers must receive all of their goods in a single visit, so we may set all customers' demand to 1.
-\item The cost of function is set as the distance travelled.
-\item Distance from one point to another may be calculated using the euclidian formula. We will use the haversine
-formula\footnote{Refer to wikipedia for this} to convert it into real distance in km.
-\item Traffic conditions are negligible and we assume that the roads from one point to another are straight.
+\item The cost function is set to the distance travelled.
+\item Distance from one point to another may be calculated using the euclidian formula. We may use the haversine
+formula\footnote{See \url{https://en.wikipedia.org/wiki/Haversine_formula}} to get real distance in km.
+\item Traffic conditions are negligible and we assume that the roads from one point to another are straight. We make this
+assumption due to lack of data.
 \end{enumerate}
 
-In addition to solving their vehicle routing problem, they have recently opened a new operations department to deal with the routing problem
- and would like a recommendation on which LP tool to use for their vehicle routing problem. The members of the team are
- mathematically competent but have very little experience with LP. Since this department is still in its
- experimental phase, its budget is minimum.
+In addition to solving their vehicle routing problem,  the company would like to compare popular LP tools
+ so that they may use the one that suits their needs. To accomplish this, we should conduct a performance analysis on the chosen LP tools
+and analyse their respective features.
 
 \section{Mathematical Formulation}
-The problem stated in the previous section is known as the vehicle routing problem (VRP) \cite{Dantzig1959, Daneshzand2011},
-a classic optimisation problem that has been documented and researched for decades. It is a problem where a fleet of vehicles,
-which are based on a central location (also known as the depot), are required to visit geographically dispersed customers
- to fulfil their respective requirements. The main objective is to find the optimal routes for the fleet of vehicles that
- yield the minimum cost, which could be in terms of fuel, time or distance. There are many variants of VRP and they are based
- on the constraints imposed onto them. A few examples include VRP with multiple depot (MDVRP) \cite{Daneshzand2011} and a VRP where the
- customers can demand or return services (VRPB) \cite{Daneshzand2011}.
-\begin{figure}[!ht]
-  \centering
-    \includegraphics[width=0.6\textwidth]{vrp-sample.png}
-    \caption{A visualisation of VRP, taken from Networking and Emerging Optimization \cite{neo:vrp}}
-\end{figure}
-
 We can specifically define the problem given in the previous section with two known VRP models: capacitated
 vehicle routing problem (CVRP) \cite{Daneshzand2011} and capacitated vehicle routing problem
-with time windows model (CVRPTW) \cite{Daneshzand2011, Desrochers1988}. The CVRP model has the following input:
+with time windows model (CVRPTW) \cite{Daneshzand2011, Desrochers1988}, both of which has a single depot.
+There are many variants of VRP and they are based
+ on the constraints imposed onto them. A few examples include VRP with multiple depot (MDVRP) \cite{Daneshzand2011} and a VRP where the
+ customers can demand or return services (VRPB) \cite{Daneshzand2011}.
+
+The CVRP model has the following input:
 \begin{itemize}
 \item A complete graph \(G = (V, E)\). which consists of the vertices \(V\) and the edges \(E\).
 \item The variable \(n\), which represent the total number of customers and the depot.
@@ -93,7 +80,7 @@ Given the input above, we can create a single depot capacitated vehicle routing 
 \end{equation}
 \begin{equation}
     \begin{array}{ll@{}ll@{}ll}
-        & \displaystyle\sum\limits_{i \in S}\sum\limits_{i \in S}  &x_{ij} \leq |S| - r(S), &\forall S \subseteq V/ \{1\} , S \neq \o \\
+        & \displaystyle\sum\limits_{i \in S}\sum\limits_{i \in S}  &x_{ij} \leq |S| - r(S), &\forall S \subseteq V/ \{1\} , S \neq \oldemptyset \\
     \end{array}
 \end{equation}
 \begin{equation}
@@ -106,21 +93,14 @@ Given the input above, we can create a single depot capacitated vehicle routing 
 
 Equations (3.2) and (3.3) are constraints to ensure that all cities are visited only once, excluding the depot. Constraints (3.4) and (3.5)
 impose the vehicles coming in must be equal to the vehicles coming out of the depot. Constraint (3.6) is the Subtour
-Elimination Constraint (SEC) to ensure that each route taken by the vehicle is a hamiltonian cycle. Subtours are cycles that exist within set of vertices that causes
-that partition the set into two or more components. Figures 3.2a and 3.2b illustrates the difference between a graph with subtours and a graph with a hamiltonian cycle.
-
-There are two common formulations to eliminate subtours: the MTZ formulation by Miller et al \cite{Miller1960} and
-the Subtour Formulation \cite{Lawler1985, Pataki2003}. Pataki \cite{Pataki2000} states that Subtour Elimination is the efficient formulation to reach optimal solution, whereas
-the MTZ Formulation is highly inefficient despite its elegance. We formulate constraint (3.6) by combining capacity cut constraint (CCC), a constraint to ensure
-that the vehicles meet the demands of all customers in a tour, with the Subtour Formulation to get the SEC for VRP \cite{Daneshzand2011}.
-The SEC is essentail in producing the optimal routes in our VRP formulation.
-
+Elimination Constraint (SEC) to ensure that each route is a hamiltonian cycle. This is to ensure that routes are optimal
+ and accurately represent the situation in real life. Subtours are
+cycles that exists within a set of vertices that partition the set into two or more components. Figures
+3.2 and 3.3 illustrates the difference between a graph with subtours and a graph with a hamiltonian cycle.
 \vspace{0.5cm}
 \begin{figure}[!ht]
   \centering
-    \begin{subfigure}{.5\textwidth}
-      \centering
-        \begin{tikzpicture}
+    \begin{tikzpicture}
           [scale=.4,every node/.style={circle,fill=blue!10}]
           \node (n6) at (1,10) {6};
           \node (n4) at (5,15)  {4};
@@ -136,10 +116,11 @@ The SEC is essentail in producing the optimal routes in our VRP formulation.
 
       \caption{A graph with subtours}
       \label{fig:subtour}
-    \end{subfigure}%
-    \begin{subfigure}{.5\textwidth}
-      \centering
-      \begin{tikzpicture}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+\begin{tikzpicture}
           [scale=.4,every node/.style={circle,fill=blue!10}]
           \node (n6) at (1,10) {6};
           \node (n4) at (5,15)  {4};
@@ -154,12 +135,15 @@ The SEC is essentail in producing the optimal routes in our VRP formulation.
         \end{tikzpicture}
       \caption{A graph with a hamiltonian cycle}
       \label{fig:hamiltoniancycle}
-    \end{subfigure}
-    \caption{A comparison of graph with identical vertices, one with subtours and the other with a hamiltonian cycle}
-    \label{fig:subtourillus}
 \end{figure}
 
-In order to model CVRPTW, we need to introduce a new set of input related to time window constraints. We hold the assumptions made in the previous chapter.
+
+There are two common formulations to eliminate subtours: the MTZ formulation by Miller \cite{Miller1960} and
+the Subtour Formulation \cite{Lawler1985, Pataki2003}. Pataki \cite{Pataki2000} states that Subtour Elimination is the efficient formulation to reach optimal solution, whereas
+the MTZ Formulation is highly inefficient despite its elegance. We formulate constraint (3.6) by combining capacity cut constraint (CCC), a constraint to ensure
+that the vehicles meet the demands of all customers in a tour, with the Subtour Formulation to get the SEC for VRP \cite{Daneshzand2011}.
+
+In order to model CVRPTW, we need to introduce a new set of input related to time window constraints:
 \begin{itemize}
 \item Variable \(D_{i}\) that represents the departure time to customer \(i\).
 \item Time function \(t_{ij}\) that outputs the time taken to travel to customer \(i\) to \(j\).
@@ -169,6 +153,7 @@ In order to model CVRPTW, we need to introduce a new set of input related to tim
 \item Variable \(q_{i}\) that represents the demand of customer \(i\).
 \item Variable \(Q\) that represent the capacity of the vehicle \(i\).
 \end{itemize}
+
 Putting it together, we have the complete CVRPTW model below:
 
 \vspace{0.5cm}
@@ -200,7 +185,7 @@ Putting it together, we have the complete CVRPTW model below:
 \end{equation}
 \begin{equation}
     \begin{array}{ll@{}ll@{}ll}
-        & \displaystyle\sum\limits_{i \in S}\sum\limits_{i \in S}  &x_{ij} \leq |S| - r(S), &\forall S \subseteq V/ \{1\} , S \neq \o \\
+        & \displaystyle\sum\limits_{i \in S}\sum\limits_{i \in S}  &x_{ij} \leq |S| - r(S), &\forall S \subseteq V/ \{1\} , S \neq \oldemptyset \\
     \end{array}
 \end{equation}
 \begin{equation}
@@ -235,34 +220,36 @@ Constraint (3.15) ensures that given a chosen path from vertex i to j, the depar
 departure time at vertex i plus the time taken to travel from vertex i to j. Constraints (3.17) and (3.18) are the
 demand and capacity constraints to ensure that the capacity does not exceed the demand at any point in the given route.
 
-\section{Solution Methods}
-Solution methods come in two categories: exact approaches and heuristics. Exact approaches attempt
-to find the optimal solution and will not stop until it finds one of the best \cite{neo:exact}. Some examples
-include branch-and-bound and the branch-and-cut algorithm \cite{here, ILPCoursera}. On the other hand, heuristics approach
- attempts to solve a problem more quickly at the expense of optimality and precision. Heuristics attempts to obtain the optimal solution by incrementally improve
- the current solution \cite{Laporte1999}. We use this technique in
-solving problems that may take too long to compute the exact answer or when exact algorithms failed to find any solutio \cite{here}.
-A few examples of these heuristics are sweep algorithm and tabu search.
-
-The LP tools implement these algorithms and heuristics to find the optimal solution given a problem. Gurobi uses branch-and-bound method
-to solve LP problems that contain integrality constraints \cite{gurobi:mip}. Whereas or-tools\footnote{this
-is implied through the implementation of the solver. See \url{http://google.com}} and Optaplanner uses heuristics approach to solve VRP and other planning based
-problems \cite{Optaplanner}.
-
-
 \section{Requirements}
-Based on our analysis and the goals of this project, we have identified a list of requirements needed to fulfill
-their request / solve their problems. This will be used to benchmark the success of our analysis... Their respective
-MoSCoW requirements are also included. They are tabulated in the list below:
-\begin{enumerate}
-\item Successfully model the LP formulations above - Must Have Priority
-\item Compare and contrast LP tools - Should Have Priority
-\item Give The optimal distance of the routes - must have
-\item Give the optimal routes  - Must have
-\item Give the optimal distance in KM - should have
-\item Provide comments on the results - should have
-\item Visualise the route on a map/graph - could haves
-\end{enumerate}
+Based on the problem and formulations in the previous section,
+we have identified a list of requirements needed to solve the stated problem.
+The requirements are a list of of criteria to ensure that our analysis is done correctly and produce the desired results.
+MoSCoW framework is used to denote their respective priority. The table below contains the requirements for this project:
+\vspace{0.5cm}
+\begin{table}[!ht]
+\centering
+\begin{tabular}{|l|p{8cm}|l|}
+\hline
+ID & Requirement                                                                                                                                                     & Priority    \\ \hline
+a  & CVRP and CVRPTW models must fulfill the subtour elimination constraints that will ensure that all routes are hamiltonian cycles                                                                                                   & Must Have   \\ \hline
+b  & CVRP and CVRPTW models must fulfill the constraints where the number of vehicles entering and leaving the depot is the same                                                                                                       & Must Have   \\ \hline
+c  & CVRP and CVRPTW models must fulfill the constraint where the vehicle capacity must not exceed the total demand of customers on a given route                                                                                               & Must Have   \\ \hline
+d  & CVRPTW models  must fulfill time window constraints                                                                                               & Must Have   \\ \hline
+e  & CVRP models chosen to solve the given VRP problem must perform well on benchmark and test datasets                                                                & Must Have   \\ \hline
+f  & LP models must be able to produce the total distance of the routes                                                                                              & Must Have   \\ \hline
+g  & LP models Should be able to produce the optimal routes                                                                                                          & Should Have \\ \hline
+h  & We must be able to compare and contrast the performance and features of LP tools                                                                                & Should Have \\ \hline
+i  & The euclidian distance given in the solution should be able to be converted to kilometers                                                                       & Could Have  \\ \hline
+j  & LP tools could visualise the vehicle routes on a map/graph                                                                                                      & Could Have  \\ \hline
+\end{tabular}
+\caption{Requirements table}
+\label{requirements-table}
+\end{table}
 
 \section{Review}
-In this section we have...
+In this chapter, we have defined the problem and transformed it into two VRP formulations: CVRP and CVRPTW. VRP is problem
+that concerns with finding the minimum total distance of routes for fleet of vehicles to satisfy a set of customers. CVRP is VRP
+where the vehicles has maximum capacity to which it can serve customers. CVRPTW is CVRP with additional constraint that
+the vehicles operate on a time window. In addition, we have defined the requirements for the stated problem listed in table 3.1.
+
+In the next chapter, we shall discuss the how the the LP formulations are created into models using different LP tools.

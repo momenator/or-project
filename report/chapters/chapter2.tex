@@ -1,10 +1,17 @@
 % chapter 2
 \chapter{Context}
-Before we proceed the actual content of the study, it is useful to introduce some concepts that will help the reader
-to understand the ideas discussed in this project. In this section, we will explain the basics of
-linear and integer programming and basic algorithms used for solving them, followed by explanation on why
-constraints programming is suitable for solving LP problems and some background information on the chosen LP tools. Last but not least,
-we also explain some terminologies on graph theory that will be used when dealing with vehicle routing problem.
+In this chapter, we will discuss the related works and the relevant concepts that will help the reader understand the ideas
+mentioned in this project.
+
+\section{Related Works}
+A few studies on the comparison of constraint programming solvers have been done before.
+Meindl et al (2012) \cite{Meindl2012} conducted a study on the analysis of popular commercial and open source solvers and concluded
+that IBM's CPLEX\footnote{See \url{http://www-01.ibm.com/software/commerce/optimization/cplex-optimizer/}} has the best performance,
+followed by Gurobi\footnote{See \url{http://www.gurobi.com}}. Hakan (2012) \cite{Hakan2012} analysed the features of
+LP Solvers, including or-tools\footnote{See \url{https://developers.google.com/optimization/}}.
+ He stated that or-tools has a lot of advantages such as easy of modelling problems and
+active user community. Gurobi Optimization also have carried out comparative study on its tools against other open
+source solvers \cite{gurobi:solvers}. The study concludes that Gurobi outperforms the other solvers mentioned.
 
 \section{Linear Programming}
 Linear programming (LP) is a mathematical method to obtain the optimal solution of a function in a linear system under set of constraints
@@ -71,31 +78,33 @@ its feasible region. The three outcomes are:
     \caption{Graphical representation of the linear program example. Figure taken from \url{http://www.zweigmedia.com/}\cite{zweigmedia}}
 \end{figure}
 
-To find the optimal solution, we use the simplex method \cite{LPChvatal, LPVanderbei}. The simplex method starts off by selecting a point in a graph.
+To find the optimal solution, we use the simplex method \cite{LPChvatal, LPVanderbei}.
+The simplex method finds an optimal point by moving from point to point until it finds the best one.
+It starts off by selecting a point in a graph.
 Then it moves to a different point of the graph. On each move, it will make sure that the point yield higher
-objective value. If no higher objective value is found, then that point would be the
-optimal solution. This method also works in higher dimensional spaces. The illustration of this algorithm is shown in figure 2.2.
-For the complete explanation on the simplex method, refer to these references \cite{LPChvatal, LPVanderbei}.
-
+objective value. The algorithm stops when it is unable to find a point with higher objective value.
+Simplex only works when the linear program has a bounded feasible region. The illustration of this algorithm is shown in figure 2.2.
+For the complete explanation on the simplex method, refer to these books \cite{LPChvatal, LPVanderbei}.
 \begin{figure}[!ht]
   \centering
     \includegraphics[width=0.8\textwidth]{simplex2.png}
     \caption{Simplex method on a linear program, taken from George Washington University \cite{seas:SM}}
     \vspace{1cm}
     \includegraphics[width=0.5\textwidth]{simplex3d.png}
-    \caption{Simplex algorithm on a three dimensional representation of a linear program, taken from Wikipedia \cite{Wiki:SPM}}
+    \caption{Simplex algorithm on a 3D space, taken from Wikipedia \cite{Wiki:SPM}}
     \vspace{1cm}
 \end{figure}
 
 \section{Integer Programming}
-Integer programming (IP) \cite{LPVanderbei} is a linear program that has an additional
-integrality constraint of imposed on to its decision variables. This is useful in situations where the values need to be
-discrete, such as the number of people or boolean values.
-When this constraint is added, finding an optimal solution becomes harder. This is because the solution space is reduced to
-the lattice points of feasible region. Linear programming that has both real valued and integer valued constraints on its
+Integer programming (IP) \cite{LPVanderbei} is LP that has an additional
+integrality constraint of imposed on to its decision variables. This is useful in situations where the variables need to be
+discrete, such as variables representing the number of people or boolean values.
+When this constraint is added, finding an optimal solution becomes harder, as denoted by its complexity.
+IP problems are in the NP Class \cite{Papadimitriou1981}, whereas LP problems are in the P class \cite{Megiddo1987}.
+ IP is harder because the solution space is reduced to
+the lattice points of feasible region, thereby adding more complexity in identifying the feasible solutions.
+Linear programming that has both real valued and integer valued constraints on its
  decision variables is called Mixed Integer Programming (MIP) \cite{LPVanderbei}.
-Also mention about IP being NP Complete and then refer to computational complexity note etc...
-
 \begin{figure}[!ht]
   \centering
     \includegraphics[width=0.7\textwidth]{ipfeasible.png}
@@ -111,75 +120,25 @@ The 'branching' part generates a tree
 that continues to expand until all valid solutions are found. The bound part compares all solutions and keeps the
 most optimal one.
 
-For the sake of clarity, we shall solve an example problem below \cite{LPVanderbei} to see how IP works:
-\[
-  \begin{array}{r@{}r@{}l}
-    \text{Maximise} \quad &{}x_{1} + 12x_{2} \\[\jot]
-    \text{subject to}\qquad &{}10x_{1} +   7x_{2} &{} \leq 40 \\
-    \qquad &{} x_{1} +   \phantom{2}x_{2} &{} \leq 5 \\
-    \qquad &{} x_{1} ,   \phantom{2}x_{2} &{} \in \mathbb{Z}_{>0}\\
-  \end{array}
-\]
-
-These are the steps of the branch of bound algorithm as it solves the IP problem above:
-\begin{itemize}
-\item The 'branch' part:
-    \begin{itemize}
-        \item \textbf{Step 1} : We start by solving the given IP problem using standard LP method such as the simplex algorithm. Then, we pick
-         real-valued decision variables as the branching variables. If there are no real-valued variables, go to step 3.
-         At this point, We are at the root of the tree that is generated by this algorithm.
-        \item \textbf{Step 2} : Create 2 branches for the chosen branching variable and set a new constraints to that variable in those branches
-        . For example, in the children of the root node of the figure 2.5,
-         we impose the constraint \(x_{1} \leq 1\) on the left side and \(x_{1} \geq 2\) on the right side of the branch.
-        \item \textbf{Step 3} : This is the recursive step of the branching algorithm. We pick a branch and then solve it
-        using the same method in step 1. At this point, there are 3 possible outcomes:
-            \begin{enumerate}
-                \item Infeasible solution: the algorithm will not continue branching from this node and picks other unexplored node
-                to solve.
-                \item Integral solution found : the branching will stop here, record the solution and move on to solve other unexplored node.
-                \item Fractional/real solution found: branch this node and then go back to step 2.
-                Exit if there are no explored nodes left.
-            \end{enumerate}
-    \end{itemize}
-\item The 'bound' part: The algorithm will compare all solutions found and keep the most optimal one. The optimal value is set negative infinity at first
-and it will be immediately replaced as soon as an integral solution is found.
- This will give the exact solution of the problem. The optimal value of this integer program is 68, where \(x_{1} = 4\) and \(x_{2} = 0\).
-\end{itemize}
-
-\vspace{0.5cm}
-
-\begin{figure}[!ht]
-  \centering
-    \includegraphics[width=0.6\textwidth]{BNB.png}
-    \caption{Enumeration tree that is generated by the branch and bound algorithm for the sample IP problem, taken from
-     Linear Programming: Foundations and Extensions by Robert Vanderlei \cite{LPVanderbei}}
-\end{figure}
-
 \section{Constraints Programming}
 Unlike the programming that we have observed so far, constraints programming (CP) is a programming paradigm that is implemented
 in LP solvers \cite{wiki:cp}. It is a programming paradigm that combines declarative and procedural paradigm \cite{wiki:cp, Bockmayr2003}.
-This seems contradictory at first, because declarative formulation is static whereas a procedural one is dynamic. The idea is boiled down to viewing
-a constraint the same way as invoking a procedure. The goal of CP is to find feasible solutions out of large solutions space, making it
+The goal of CP is to find feasible solutions out of large solutions space, making it
 more suitable to accomodate LP. CP focuses on the constraints and variables rather than the objective function.
-
 In this paradigm, a constraint program may be written declaratively but should be viewed as a procedure that operates on a
 solution space. Each constraints will be added to a constraint store, which limits the space that must be searched.
-Constraint store uses a filtering algorithm that serves as a litmus test for solutions \cite{Bockmayr2003}.
+Constraint store uses a filtering algorithm that serves as a litmus test to determine the feasibility of a solution \cite{Bockmayr2003}.
 At the end of the filtering procedure, we obtain a feasible solution.
-
-Given this view, constraint programming formulation tends to look
-more like a mathematical programming model than a computer program, since the user writes constraints declaratively
-rather than writing procedures to enforce these constraints. For this reason, programming environment that adopts CP
-is more suited for solving LP based problems in a computer.
 
 \section{Tools}
 In this project, we will be using three LP tools: Gurobi\footnote{See \url{http://gurobi.com}},
 or-tools\footnote{See \url{https://developers.google.com/optimization/}} and Optaplanner\footnote{See \url{http://www.optaplanner.org}}.
-These tools have their own unique APIs and input format. These tools come with their own version of LP solver that
-have unique strengths and weaknesses, as we shall observe in chapter 5.
+We have chosen Gurobi mainly due to its performance and popularity. Or-tools and Optaplanner were chosen because
+their performance have not been widely documented and they show and they show a lot of promise given their active user community
+and high development activity.
 
 Gurobi is a optimisation tool built for solving LP based problems. Its LP solver is written in C and it comes with
-APIs to port many different programming languages including Java, C++, Python and a few others. Gurobi allows you
+application programming interfaces (API) to port many different programming languages including Java, C++, Python and a few others. Gurobi allows you
 to build any models for any LP problem, giving users full control to implement any algorithms or heuristics that they
 prefer. It claims to be the fastest solver amongst 3 other open source solvers \cite{gurobi:solvers}, none
 of which are used in this project. Gurobi is one of the most expensive commercial LP solver in the industry
@@ -213,26 +172,26 @@ more commonly refered to as \textbf{vertices} and \textbf{edges} respectively.
 \item A \textbf{hamiltonian cycle} is hamiltonian path that also happens to be a cycle.
 \end{itemize}
 
-\section{Computational Complexity}
-Talk about decision problems and its classifications, P and NP problems and how does it affect the computation of the problem.
-We classify easy and hard problems in Computer Science depending on whether they can be solved by an Algorithm within polynomial time or not.
-The problems are restricted to decision problems, which are problems that can be answered with a yes or a no. Decision problems fall into
-two main important classes: P and NP. P class consists of decision problems in which polynomial time algorithm exists. On the other hand,
-NP class consists of decision problems that can be solved by non-deterministic turing machine\footnote{refer to wikipedia} in polynomial time.
-Or in other words, it can be determined if this problem has a solution in polynomial time???(must check this again..). Explain NP hard and
-NP completeness
-Explain the question if P=NP?Lenstra et al \cite{here} explains that VRP is hard. This is because..
+\section{Solution Methods and Complexity of VRP}
+Solution methods come in two categories: exact approaches and heuristics. Exact approaches attempt
+to find the optimal solution and will not stop until it finds one of the best \cite{neo:exact}. Some examples
+include branch-and-bound \cite{LPVanderbei} and the branch-and-cut algorithm \cite{ILPCoursera}. On the other hand, heuristics approach
+ attempts to solve a problem more quickly at the expense of optimality and precision. Heuristics attempts to obtain the optimal solution by incrementally improve
+ the current solution \cite{Laporte1999}. We use this technique in
+solving problems that may take too long to compute the exact answer or when exact algorithms failed to find any solution \cite{neo:exact}.
 
-This means that we have to use efficient algorithm otherwise it would take too long to compute. Imagine doing a brute force algorithm, it
-would take very long time to compute. Linear programming is the best method out there that has polynomial running time... or something like
-that... Due to the nature of the problem, it may take very long time to compute it.
+Lenstra et al states that all variants of VRP are NP-Hard \cite{Lenstra1981}. The implication of this is that it may
+take a really long time to compute certain instances of VRP. Thus, heuristics based approach may be preferrable as opposed to
+the exact one.
 
 \section{Review}
-In this chapter, we have introduced the key concepts that are recurring throughout the project. Linear programming is a
+In this chapter, we have introduced the related works and the key concepts of this project. Linear programming is a
 mathematical method concerns with finding an optimal value of a function in a linear system under a set of constraints. Integer
 programming is linear programming with the additional constraint where all of its decision variables are restricted to integers.
 There are several algorihtms to find the optimal value of the objective function in a linear program such as simplex and branch-and-bound
-algorithm. We also explained constraints programing, a programming paradigm that helps software engineers implement program
-to solve linear programs and some background information on LP tools used in this project. Lastly, we covered some basic
-concepts in graph theory that will be mentioned quite frequently throughout the project. In particular, is term hamiltonian cycle, which is
-a term used to describe a sequence of vertices in a path where each node is visited only once ending in the first node, thus forming a cycle.
+algorithm. We also explained constraints programing, a programming paradigm to solve linear programs and
+some background information on LP tools used in this project. We also covered some basic
+concepts in graph theory that will be mentioned quite frequently throughout the project. Lastly, we discussed the
+computational complexity and how it impacts the computation of VRP.
+
+In the next chapter, we will create LP formulations and produce the requirements and the deliverables for the company involved.
