@@ -96,9 +96,9 @@
 \begin{abstract2}
 
     Linear programming (LP) is a method to find the optimal solution to combinatorial optimisation problems.
-    In this project, we will be using linear programming to solve a specific instance of a vehicle routing problem (VRP) and
+    In this project, we will be using linear programming to solve an instance of a vehicle routing problem (VRP) and
      analyse the performance of three different LP tools: Gurobi, or-tools and
-    Optaplanner. Our goal is to be able to find an optimal solution to the problem and analyse the strengths and weaknesses
+    Optaplanner. Our goal is to be able to find an optimal solution to the problem and analyse the performance and the features
     of the chosen tools.
 
     First, we create LP formulations: the capacitated vehicle routing problem (CVRP) and the capacitated
@@ -106,8 +106,8 @@
     analysis of the LP tools using the benchmark and test datasets. Finally, we choose a tool based
     on the performance analysis and find the optimal solution to the two LP formulations.
 
-    Our analysis conclude that Optaplanner is the ideal tool for this problem, even though Gurobi has the better
-    performance overall. Or-tools performs poorly or take too long to compute the solution to the problem. Using
+    Our analysis conclude that Optaplanner is the ideal tool for this problem as Gurobi is impractical to use
+     and or-tools produce very inefficient solutions to VRP instances. Using
     Optaplanner, we have obtained an optimal solution that uses 8 vehicles with capacity of 29 and yield eucledian
     distances of 10.27 and 10.49 for CVRP and CVRPTW model respectively.
 

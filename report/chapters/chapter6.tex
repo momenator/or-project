@@ -1,16 +1,40 @@
 % chapter 6
-\chapter{Conclusions and Future Work}
-We have successfully conducted an OR study using the methodology stipulated in chapter 1 based on the problem defined chapter 3.
-We have successfully created LP formulations out of modelled those them using
- the chosen LP tools. Our analysis shows that Gurobi has the best overall performance and whereas or-tools has the worst.
- Our analysis concludes that Optaplanner performs better in solving the given VRP problem. We have used optaplanner to find
- the optimal solution to the problem and it yields 10.27 and 10.49 eucledian distances for CVRP and CVRPTW model
- respectively. The real distances in km are 798.23 and 828.23 for CVRP and CVRPTW model respectively.  This analysis
- has one downside which is that it does not accurately model road distances, which may reduce the accuracy by as much
- as x percent.
+\chapter{Evaluations and Conclusions}
+\section{A brief Summary}
+In this project, we aim to analyse a given VRP problem using chosen LP tools and analyse them in terms of their performance
+and features. We have set some goals to fulfill those aims and the methodology to achieve those goals.
 
+By following the methodology, we have successfully created LP formulations and models using
+chosen tools. Our models have meet all of the stipulated requirements that were set in chapter 3.
+In performance analysis, we have found that Gurobi and Optaplanner give optimal solution to solve the given VRP instances. On the other hand,
+or-tools consistently underperform on most of the datasets, especially the P-VRP-60. In addition, Gurobi was impractical to use
+as it takes a very long time to compute the solution. Given these reasons, we have decided to use Optaplanner to solve the given
+VRP problem. During the implentation of our LP models, we have also conducted feature analysis and tabulated the results in table
+5.4.
+
+Using optaplanner, we found the optimal solution to the problem to be 10.27 for CVRP and 10.49 for CVRPTW model measured in eucledian distances.
+The real distances in km are 798.57 and 828.95 for CVRP and CVRPTW model respectively. Unfortunately, those distances does not
+accurately represent the actual road distances as we assume the distance from one vertex to another is straight. This assumption
+was made due to lack of traffic data. In addition to the total distance, we have also
+tabulated the set of routes and route visualisation for each model.
+
+\section{Evaluation}
+In the list below, we asses the outcome of this project based on the goals stated in chapter 1.
+\begin{enumerate}
+    \item \textbf{Goal 1 and 2} - We have reviewed the literature and the tools that are needed to understand linear programming and create an
+     formulation to the given VRP problem. We can confirm this by the fact that our LP models have produced solutions that
+     are very close to the best.
+    \item \textbf{Goal 3} - We have conducted performance analysis and feature analysis on all the chosen LP tools. The results
+    are shown in chapter 5.
+    \item \textbf{Goal 4} - We have successfully produced the CVRP and CVRPTW models using Optaplanner that produces the
+     total minimal distance travel and the optimal vehicle routes based on the given VRP problem.
+\end{enumerate}
+
+\section{Future Work}
 There are clearly more room for improvements in some aspects of this project, which would be ideal for future work.
-One would be to incorporate road distances to ensure that the model simulate real life scenario as accurately as
-possible. We could also replicate the same study under different environment and limitations, such as using high performance
-computer or using a longer time limit. Instead of focusing on solely solving VRP, we can test the performance of the solver
-on other benchmark datasets.
+The list of possible future works are listed below:
+\begin{enumerate}
+    \item Using real road distances or other cost functions such as fuel or time taken in the VRP model.
+    \item Solving VRP by using other methods such as dynamic or genetic programming.
+    \item Studying the effects of heuristics on the solution of VRP or other routing problems.
+\end{enumerate}

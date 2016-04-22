@@ -55,12 +55,38 @@ in examples directory in the project folder
 \end{enumerate}
 
 \section{How to Run Optaplanner Models}
+\subsection{Running Parsed Models}
 \begin{enumerate}
-    \item
+    \item copy the 'solved' and 'unsolved' folder in this repository to the directory where the XML inputs for vehicle
+    routing problems are kept. They are kept in the following path : /examples/sources/data/vehiclerouting of
+    the Optaplanner optimisation suite.
+    \item run Optaplanner using ./runExamples.sh on Unix or ./runExamples.bat on windows from its root directory.
+    \item Using the GUI, select the desired model and press the solve button on the top right hand corner of the optimisation suite.
 \end{enumerate}
 
+\subsection{Parsing Models}
+We use xml-gen.py to parse the given datasets into XML files. The script only process datasets that have certain schema.
+\begin{enumerate}
+    \item Edit xml-gen.py in this project's repository (under the optaplanner directory) to locate the right dataset files
+    and parameters.
+    \item Run the script using python to obtain the desired XML file.
+\end{enumerate}
+
+\subsection{Retrieving the Optimal Routes}
+\begin{enumerate}
+    \item Edit rt-dist-calc.py in this project's repository (under the optaplanner directory)to locate the solved Optaplanner model and
+    the file where the file should be written.
+    \item Run the script using python to write the optimal routes to the specified file.
+\end{enumerate}
+
+\subsection{Computing Total distance in kilometers}
+\begin{enumerate}
+    \item Edit rt-dist-calc.py in this project's repository (under the optaplanner directory) to calculate the total distance
+    \item Run the script using python to get the distance in kilometers.
+\end{enumerate}
+
+
 \chapter{Datasets}
-\
 \section{Node Number to Postal Code Dictionary}
 \vspace{0.5cm}
 \lstinputlisting[language=Python]{./dataset/nodes-dict.txt}
@@ -94,8 +120,6 @@ in examples directory in the project folder
 \section{Vehicle Routes}
 \begin{table}[!ht]
 \centering
-\caption{Routes for CVRP Model}
-\label{cvrp-routes}
 \begin{tabular}{|l|l|}
 \hline
 Vehicle No         & Order of visit                                                                         \\ \hline
@@ -116,12 +140,12 @@ Vehicle No         & Order of visit                                             
 \multirow{2}{*}{8} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}3, 6, 89, 151, 129, 157, 122, 137, 159, 158, 117, 174, 198, 186,\\ 212, 211, 221, 219, 200, 203, 197, 179, 170, 149, 160, 148, 100, 81, 27\end{tabular}}  \\
                    &                                                                                  \\ \hline
 \end{tabular}
+\caption{Routes for CVRP Model}
+\label{cvrp-routes}
 \end{table}
 
 \begin{table}[ht!]
 \centering
-\caption{Routes for CVRPTW Model}
-\label{cvrptw-routes}
 \begin{tabular}{|l|l|}
 \hline
 Vehicle No         & Order of visit                                                                           \\ \hline
@@ -142,17 +166,20 @@ Vehicle No         & Order of visit                                             
 \multirow{2}{*}{8} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}19, 20, 30, 17, 14, 13, 15, 35, 34, 38, 28, 39, 64, 138, 66, 58,\\ 49, 51, 4, 5, 6, 11, 16, 10, 9, 50, 12, 18\end{tabular}}  \\
                    &                                                                                  \\ \hline
 \end{tabular}
+\caption{Routes for CVRPTW Model}
+\label{cvrptw-routes}
 \end{table}
-
+\vspace{5cm}
 \section{Route Visualisation}
+
 \begin{figure}[ht!]
   \centering
-    \includegraphics[width=1\textwidth]{227-cvrp.png}
+    \includegraphics[width=0.85\textwidth]{227-cvrp.png}
     \caption{Visualisation of CVRP Model}
 \end{figure}
 \begin{figure}[!ht]
   \centering
-    \includegraphics[width=1\textwidth]{227-cvrptw.png}
+    \includegraphics[width=0.85\textwidth]{227-cvrptw.png}
     \caption{Visualisation of CVRPTW Model}
 \end{figure}
 
@@ -250,5 +277,5 @@ results obtained.
 \section{xml-gen.py - XML Generator Script for Optaplanner}
 \lstinputlisting[language=Python]{./optaplanner/xml-gen.py}
 
-\section{rt-dist-calc.py - Haversine Function Script}
+\section{rt-dist-calc.py - Distance Utility Script}
 \lstinputlisting[language=Python]{./optaplanner/rt-dist-calc.py}

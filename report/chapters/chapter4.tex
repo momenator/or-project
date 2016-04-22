@@ -4,7 +4,7 @@ In this chapter, we will discuss the implementation
 of the two LP formulations from the previous chapter using the chosen tools.
 This project is hosted on a github repository that can be accessed on \url{https://github.com/mombi93/or-project}.
 
-\section{Hardware and LP Tools Specification}
+\section{Hardware and LP Tools Specifications}
 The tools are run on the same hardware. The hardware is a macbook pro 2014 with is 2.8GHz dual-core Intel i5 processor. It has
 8GB 1600 MHz DDR3 memory and is running OSX version 10.9.5. We are using Gurobi version 6.5.0, binary distribution of or-tools version 1.0.0
 and Optaplanner version 6.3.0 in this project. We will be using Python version 2.7.5\footnote{https://www.python.org/}
@@ -31,7 +31,8 @@ Unlike the test dataset, the parameters of the problem datasets have to be estim
 The test and problem datasets
 share the same schema: Node number, Latitude and Longitude. Unlike the other two datasets, the original benchmark datasets came in
 XML format and had to be parsed into a matrix format to fit into the LP models. The parsed benchmark dataset has the following schema:
-Node number, Latitude, Longitude and Demand. The datasets are available in the github repository.
+Node number, Latitude, Longitude and Demand. Due to the sheer size of the datasets, they will not be included in this report. However,
+they are available in the repository.
 
 \section{Model Parameters}
 Below are the parameters that are needed for the CVRP model:

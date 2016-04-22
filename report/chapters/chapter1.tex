@@ -5,7 +5,7 @@ This project is about using linear programming (LP) and analysing the different 
 
 \section{The Problem}
 Furnish ltd\footnote{A fictional company} is a leading furniture store in the UK. It regularly makes door-to-door deliveries to customers
-across the country. Making these deliveries cost a lot of money and the company is looking to minimise cost incurred by using delivery routes
+across the country. Making these deliveries costs a lot of money and the company is looking to minimise cost incurred by using delivery routes
 that have shorter distances. With this goal in mind, they are hoping to maximise their profits and reduce carbon emissions.
 
 The problem stated above is known as the vehicle routing problem (VRP) \cite{Dantzig1959, Daneshzand2011}. It is a problem where a fleet of vehicles,
@@ -19,7 +19,7 @@ Despite being a simple problem to explain, it is notoriously difficult to find a
 It also plays a part towards understanding the P vs NP problem\footnote{
 See \url{http://www.claymath.org/millennium-problems/p-vs-np-problem}} by providing a testbed for new algorithms.
 A visualisation of VRP is shown in figure 1.1.
-
+\vspace{0.5cm}
 \begin{figure}[!ht]
   \centering
     \includegraphics[width=0.6\textwidth]{vrp-sample.png}
@@ -31,7 +31,7 @@ of resources among competing activities in a system of linear equations \cite{AP
 problems since the 19th century, none of which made any significant impact. The turning point came in 1947, where George Dantzig
 developed the Simplex method \cite{wiki:SA}, an algorithm to solve LP problems. Simplex method was highly influential
 in the development and practice of science and engineering such that it was
-listed as one of the top 10 algorithms of the 20th century. It also made a signigicant impact in
+listed as one of the top 10 algorithms of the twentieth century\footnote{See \url{https://www.computer.org/csdl/mags/cs/2000/01/c1022.html}}. It also made a signigicant impact in
  Operations Research (OR), a field of study that concerns with making better decisions through mathematical analysis \cite{wiki:OR}.
  With increasingly higher computational power and
 the efficiency of the simplex method, LP has become the most powerful optimisation method that enchance decision making
@@ -47,9 +47,9 @@ performance.
 To achieve those aims, we have set up the list of goals below:
 \begin{enumerate}
 \item To thoroughly understand linear programming and other related concepts to solve problems.
-\item To correctly identify the problem and build accurate LP models based on it.
+\item To correctly identify the given problem and build accurate LP formulations and models based on it.
+\item To obtain the optimal solutions to the given problem: the minimum distance and the vehicle routes.
 \item To analyse the performance and features of the chosen LP tools.
-\item To obtain the optimal solutions: the minimum distance and the vehicle routes, using the chosen LP tool.
 \end{enumerate}
 
 \section{Limitations}
@@ -84,14 +84,14 @@ For clarity, we have list down those terminologies along with their respective m
 \item Linear/integer Program - An instance of a problem that can be solved using a linear/integer programming method.
 \item Formulation - An instance of LP that describes a specific problem.
 \item Model (Noun) - An implementation of an LP formulation in an LP tool.
-\item Solver - A program that is used to solve LP problems that is based on constraint programming\footnote{refer to chapter 2}.
+\item Solver - A program that is used to solve LP problems that is based on constraint programming.
 \item Method - Often used interchangeably with algorithm.
 \end{itemize}
 
 \section{Outline of Subsequent Chapters}
 We have introduced the reader to this project, describe its goals and how to steps taken to attain them. In chapter 2,
 we will provide some contexts for the reader on the theories that we apply in the project. Chapter 3 will focus on
-analysing the given problem, including forming the correct LP formulation and identifying the client's requirements.
-The implentation of LP formulations using the chosen tools will be discussed in chapter 4, followed by the results and
-some their comments in chapter 5. Finally, we will conclude the results and identify potential future works
+analysing the given problem, including forming the correct LP formulation and identifying the requirements needed to solve the problem.
+The implentation of LP formulations using the chosen tools will be discussed in chapter 4, followed by the evaluation of results
+in chapter 5. Finally, we will conclude the results and identify potential future works
 of this project in chapter 6.

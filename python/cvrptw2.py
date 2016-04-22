@@ -140,7 +140,7 @@ def time_length(node1, node2):
 
 def main():
 	myModel = CVRPORtools(9, 3, 4)
-	input_data_file = open('./examples/python/data/cvrp_9.txt', 'r')
+	input_data_file = open('./examples/python/data/T-VRP-9.txt', 'r')
 	#input_time_data_file = open()
 	myModel.parse_node_matrix(input_data_file)
 	input_data_file.close()
