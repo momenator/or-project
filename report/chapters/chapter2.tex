@@ -120,6 +120,26 @@ The 'branching' part generates a tree
 that continues to expand until all valid solutions are found. The bound part compares all solutions and keeps the
 most optimal one.
 
+\section{Vehicle Routing Problem}
+Vehicle routing problem (VRP) was first formulated by George Dantzig in 1959 as the truck dispatching problem \cite{Dantzig1959}.
+It is problem that concerns with finding the optimal routes for a fleet of vehicles \cite{Dantzig1959, Daneshzand2011}.
+The optimal routes should yield minimum total cost, which could be in terms of fuel, time or distance.
+
+There are many algorithms to solve VRP, including branch-and-bound \cite{Dastghaibifard2008, LPVanderbei}, dynamic programming \cite{Kok2009} and genetic algorithm \cite{Masum2011}.
+These algorithms can be divided into two categories: exact approaches and heuristics. Exact approaches attempt
+to find the optimal solution by using a very large search space to search for the solution \cite{neo:exact}. The solution would be more optimal at the expense
+ of longer running time. On the other hand, heuristics approach
+ attempts to solve a problem more quickly at the expense of optimality and precision. Heuristics attempts to approximate the optimal solution by incrementally improve
+ the current solution \cite{Laporte1999}. We use this technique in solving problems that may take too long to compute the exact answer or when exact algorithms failed to find any solution \cite{neo:exact}.
+ Lenstra \cite{Lenstra1981} states that all variants of VRP are NP-Hard. The implication of this is that it may
+take a really long time to compute certain instances of VRP. Thus, heuristics based approach may be preferrable as opposed to
+the exact one.
+
+There are many variants of VRP and they are based
+ on the constraints imposed onto them. In this project, we will be focusing on VRP instances that only have one depot.
+  Other examples include VRP with multiple depot (MDVRP) \cite{Daneshzand2011} and a VRP where the
+ customers can demand or return services (VRPB) \cite{Daneshzand2011}.
+
 \section{Constraints Programming}
 Unlike the programming that we have observed so far, constraints programming (CP) is a programming paradigm that is implemented
 in LP solvers \cite{wiki:cp}. It is a programming paradigm that combines declarative and procedural paradigm \cite{wiki:cp, Bockmayr2003}.
@@ -171,18 +191,6 @@ more commonly refered to as \textbf{vertices} and \textbf{edges} respectively.
 \item A \textbf{cycle} is a walk such that the first vertex corresponds with the last.
 \item A \textbf{hamiltonian cycle} is hamiltonian path that also happens to be a cycle.
 \end{itemize}
-
-\section{Solution Methods and Complexity of VRP}
-Solution methods come in two categories: exact approaches and heuristics. Exact approaches attempt
-to find the optimal solution and will not stop until it finds one of the best \cite{neo:exact}. Some examples
-include branch-and-bound \cite{LPVanderbei} and the branch-and-cut algorithm \cite{ILPCoursera}. On the other hand, heuristics approach
- attempts to solve a problem more quickly at the expense of optimality and precision. Heuristics attempts to obtain the optimal solution by incrementally improve
- the current solution \cite{Laporte1999}. We use this technique in
-solving problems that may take too long to compute the exact answer or when exact algorithms failed to find any solution \cite{neo:exact}.
-
-Lenstra et al states that all variants of VRP are NP-Hard \cite{Lenstra1981}. The implication of this is that it may
-take a really long time to compute certain instances of VRP. Thus, heuristics based approach may be preferrable as opposed to
-the exact one.
 
 \section{Review}
 In this chapter, we have introduced the related works and the key concepts of this project. Linear programming is a

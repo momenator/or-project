@@ -7,16 +7,16 @@
 \contentsline {section}{\numberline {1.2}Aims and Goals}{9}{section.1.2}
 \contentsline {section}{\numberline {1.3}Limitations}{9}{section.1.3}
 \contentsline {section}{\numberline {1.4}Methodology}{10}{section.1.4}
-\contentsline {section}{\numberline {1.5}Terminologies}{11}{section.1.5}
+\contentsline {section}{\numberline {1.5}Terminologies}{10}{section.1.5}
 \contentsline {section}{\numberline {1.6}Outline of Subsequent Chapters}{11}{section.1.6}
 \contentsline {chapter}{\numberline {2}Context}{12}{chapter.2}
 \contentsline {section}{\numberline {2.1}Related Works}{12}{section.2.1}
 \contentsline {section}{\numberline {2.2}Linear Programming}{13}{section.2.2}
 \contentsline {section}{\numberline {2.3}Integer Programming}{16}{section.2.3}
-\contentsline {section}{\numberline {2.4}Constraints Programming}{18}{section.2.4}
-\contentsline {section}{\numberline {2.5}Tools}{18}{section.2.5}
-\contentsline {section}{\numberline {2.6}Graph Theory}{19}{section.2.6}
-\contentsline {section}{\numberline {2.7}Solution Methods and Complexity of VRP}{20}{section.2.7}
+\contentsline {section}{\numberline {2.4}Vehicle Routing Problem}{18}{section.2.4}
+\contentsline {section}{\numberline {2.5}Constraints Programming}{19}{section.2.5}
+\contentsline {section}{\numberline {2.6}Tools}{19}{section.2.6}
+\contentsline {section}{\numberline {2.7}Graph Theory}{20}{section.2.7}
 \contentsline {section}{\numberline {2.8}Review}{21}{section.2.8}
 \contentsline {chapter}{\numberline {3}Requirements and Analysis}{22}{chapter.3}
 \contentsline {section}{\numberline {3.1}Problem Definition}{22}{section.3.1}

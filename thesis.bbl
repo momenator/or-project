@@ -93,18 +93,15 @@ G.~Dastghaibifard, E.~Ansari, S.~Sheykhalishahi, A.~Bavandpouri, and E.~Ashoor,
   (Hong Kong), International MultiConference of Engineers and Computer
   Scientists, 2008.
 
-\bibitem{wiki:cp}
-Wikipedia, ``Constraint programming --- wikipedia{,} the free encyclopedia,''
-  2016.
-\newblock [Online]
-  \url{https://en.wikipedia.org/w/index.php?title=Constraint_programming&oldid=707945257}.
+\bibitem{Kok2009}
+A.~Kok, C.~Meyer, H.~Kopfer, and J.~Schutten, ``Dynamic programming algorithm
+  for the vehicle routing problem with time windows and ec social
+  legislation,'' 2009.
 
-\bibitem{Bockmayr2003}
-A.~Bockmayr and J.~N. Hooker, ``Constraint programming,'' 2003.
-
-\bibitem{wilson1996}
-R.~Wilson, {\em Introduction to Graph Theory}.
-\newblock 1996.
+\bibitem{Masum2011}
+A.~K.~M. Masum, M.~F. Faruque, M.~Shahjalal, and M.~I.~H. Sarker, ``Solving the
+  vehicle routing problem using genetic algorithm,'' {\em International Journal
+  of Advanced Computer Science and Applications}, vol.~2, no.~7, 2011.
 
 \bibitem{neo:exact}
 NEO, ``Solution methods for vrp,'' 2016.
@@ -117,6 +114,19 @@ G.~Laporte, M.~Gendreau, J.-Y. Potvin, and F.~Semet, ``Classical and modern
 \bibitem{Lenstra1981}
 J.K.Lenstra and A.~R. Kan, ``Complexity of vehicle routing and scheduling
   problems,'' {\em Networks}, vol.~11, pp.~221--227, 1981.
+
+\bibitem{wiki:cp}
+Wikipedia, ``Constraint programming --- wikipedia{,} the free encyclopedia,''
+  2016.
+\newblock [Online]
+  \url{https://en.wikipedia.org/w/index.php?title=Constraint_programming&oldid=707945257}.
+
+\bibitem{Bockmayr2003}
+A.~Bockmayr and J.~N. Hooker, ``Constraint programming,'' 2003.
+
+\bibitem{wilson1996}
+R.~Wilson, {\em Introduction to Graph Theory}.
+\newblock 1996.
 
 \bibitem{Desrochers1988}
 M.~Desrochers, J.~Lenstra, M.~Savelsbergh, and F.~Soumis, ``Vehicle routing
